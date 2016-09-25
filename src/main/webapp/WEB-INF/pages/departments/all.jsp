@@ -4,19 +4,52 @@
 <head>
   <title>All</title>
 </head>
-<table width="600px">
+<body>
+
+<table border="1">
+  <caption>Our departments</caption>
   <tr>
-    <td><b>Name</b></td>
+    <th>id</th>
+    <th>Name</th>
+    <th>Delete</th>
+    <th>Edit</th>
   </tr>
+
   <c:forEach var="department" items="${departments}">
-    <tr>
-      <td>${department.name}</td>
-      <%--<td><a href="/depAdd?id=${contact.id}">Edit</a> | <a href="/delete?id=${contact.id}">Delete</a></td>--%>
-    </tr>
+
+  <tr><td>${department.id}</td><td>${department.name}</td>
+    <td><a href="/depDelete?id=${department.id}">Delete</a></td>
+    <td><a href="/depEdit?id=${department.id}">Edit</a></td></tr>
   </c:forEach>
-  <tr>
-    <td colspan="5">
-      <a href="/depAdd">Add new one</a>
-    </td>
-  </tr>
-</table>
+
+  </table>
+
+
+
+<a href="/depAdd">Add new one</a>
+
+
+
+</body>
+
+
+
+<%--<table width="600px">--%>
+  <%--<tr>--%>
+    <%--<td><b>Name</b></td>--%>
+  <%--</tr>--%>
+
+    <%--<tr>--%>
+      <%--<td>${department.name}</td>--%>
+      <%--<td> <a href="/depDelete?id=${department.id}">Delete</a></td>--%>
+    <%--</tr>--%>
+
+
+
+  <%--</c:forEach>--%>
+  <%--<tr>--%>
+    <%--<td colspan="5">--%>
+      <%--<a href="/depAdd">Add new one</a>--%>
+    <%--</td>--%>
+  <%--</tr>--%>
+<%--</table>--%>

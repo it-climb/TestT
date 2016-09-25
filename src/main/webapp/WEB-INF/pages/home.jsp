@@ -11,6 +11,8 @@
   <title>Hello world</title>
 </head>
 <body>
-  Home World !
+  Hello, World !
+  <p style="text-align: left"><a href="/dep">New department </a>
+
 </body>
 </html>
