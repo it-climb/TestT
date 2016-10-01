@@ -49,6 +49,15 @@ public class DepartmentController {
         }
         return "redirect:/dep";
     }
-
+    @RequestMapping(value = "/depDel", method = RequestMethod.GET)
+    public String delDep(@RequestParam(required = true) Integer id) {
+        try {
+            Department delDepartment = departmentService.getById(id);
+            departmentService.delete(delDepartment);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/dep";
+    }
 
 }
