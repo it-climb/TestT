@@ -60,5 +60,6 @@ public class MainController {
         contactService.remove(id);
         return "redirect:/";
     }
-
 }
+
+

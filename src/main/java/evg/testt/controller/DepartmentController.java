@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import java.sql.SQLException;
@@ -40,7 +41,7 @@ public class DepartmentController {
 
     @RequestMapping(value = "/depSave", method = RequestMethod.POST)
     public String addNewOne(@RequestParam(required = true) String departmentName,
-    @RequestParam(required = false) Integer id) {
+                            @RequestParam(required = false) Integer id) {
         Department department;
         if(id==null) {
             department = new Department();
@@ -71,7 +72,9 @@ public class DepartmentController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return new ModelAndView(JspPath.DEPARTMENT_EDIT, "dep", department);
+        ModelAndView modelAndView = new ModelAndView(JspPath.DEPARTMENT_EDIT);
+        modelAndView.addObject("dep", department);
+        return modelAndView;
     }
     @RequestMapping(value = "/depDel", method = RequestMethod.POST)
     public String delOne(@RequestParam(required = true) Integer id) {

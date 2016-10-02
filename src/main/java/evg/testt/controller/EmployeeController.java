@@ -1,6 +1,5 @@
 package evg.testt.controller;
 
-import evg.testt.model.Department;
 import evg.testt.model.Employee;
 import evg.testt.service.DepartmentService;
 import evg.testt.service.EmployeeService;
@@ -23,10 +22,11 @@ import java.util.List;
 public class EmployeeController {
     @Autowired
     DepartmentService departmentService;
+    @Autowired
     EmployeeService employeeService;
 
-    @RequestMapping(value = "/empl", method = RequestMethod.GET)
-    public ModelAndView showAll() {
+    @RequestMapping(value = "/allEmplInDep", method = {RequestMethod.GET,  RequestMethod.POST})
+    public ModelAndView showAll(@RequestParam(required = true) Integer id) {
         List<Employee> employees;
         try {
             employees = employeeService.getAll();
@@ -34,58 +34,69 @@ public class EmployeeController {
             employees = Collections.emptyList();
             e.printStackTrace();
         }
-        return new ModelAndView(JspPath.EMPLOYEE_ALL, "empl", employees);
+        ModelAndView modelAndView = new ModelAndView(JspPath.EMPLOYEE_ALL, "allEmplInDep", employees);
+        modelAndView.addObject("depID", id);
+        return modelAndView;
     }
 
-    @RequestMapping(value = "/emplAdd", method = RequestMethod.GET)
-    public ModelAndView showAdd() {
-        return new ModelAndView(JspPath.DEPARTMENT_ADD);
+    @RequestMapping(value = "/emplAdd", method = RequestMethod.POST)
+    public ModelAndView showAdd(@RequestParam(required = true)Integer depID) {
+        ModelAndView modelAndView = new ModelAndView(JspPath.EMPLOYEE_ADD);
+        modelAndView.addObject("depID", depID);
+        return modelAndView;
     }
 
     @RequestMapping(value = "/emplSave", method = RequestMethod.POST)
-    public String addNewOne(@RequestParam(required = true) String departmentName,
-                            @RequestParam(required = false) Integer id) {
-        Department department;
-        if(id==null) {
-            department = new Department();
-            department.setName(departmentName);
+    public String addNewOne(@RequestParam(required = true) String employeeFirstName, String employeeSecondName,Integer depID,
+                            @RequestParam(required = false) Integer emplID) {
+        Employee employee;
+        if(emplID ==null) {
+            employee = new Employee();
+            employee.setFirstName(employeeFirstName);
+            employee.setSecondName(employeeSecondName);
+
             try {
-                departmentService.insert(department);
+                employee.setDepartment(departmentService.getById(depID));
+                employeeService.insert(employee);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }else {
 
             try {
-                department = departmentService.getById(id);
-                department.setName(departmentName);
-                departmentService.update(department);
+                employee = employeeService.getById(emplID);
+                employee.setFirstName(employeeFirstName);
+                employee.setSecondName(employeeSecondName);
+                departmentService.update(departmentService.getById(depID));
+                employeeService.update(employee);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-        return "redirect:/dep";
+        return "redirect:/allEmplInDep?id="+depID;
     }
-    @RequestMapping(value = "/depEdit", method = RequestMethod.POST)
-    public ModelAndView EditOne (@RequestParam(required = true) Integer id){
-        Department department = null;
+    @RequestMapping(value = "/emplEdit", method = RequestMethod.POST)
+    public ModelAndView EditOne (@RequestParam(required = true) Integer id, Integer depID){
+        Employee employee = null;
 
         try {
-            department = departmentService.getById(id);
+            employee = employeeService.getById(id);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return new ModelAndView(JspPath.DEPARTMENT_EDIT, "dep", department);
+        ModelAndView modelAndView = new ModelAndView(JspPath.EMPLOYEE_EDIT, "empl", employee);
+        modelAndView.addObject("depID", depID);
+        return modelAndView;
     }
-    @RequestMapping(value = "/depDel", method = RequestMethod.POST)
-    public String delOne(@RequestParam(required = true) Integer id) {
-        Department department = new Department();
-        department.setId(id);
+    @RequestMapping(value = "/emplDel", method = RequestMethod.POST)
+    public String delOne(@RequestParam(required = true) Integer id, Integer depID) {
+        Employee employee = new Employee();
+        employee.setId(id);
         try {
-            departmentService.delete(department);
+            employeeService.delete(employee);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return "redirect:/dep";
+        return "redirect:/allEmplInDep?id="+depID;
     }
 }

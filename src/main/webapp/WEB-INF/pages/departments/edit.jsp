@@ -12,24 +12,30 @@
     <title>Edit DEPARTMENT!!!!!</title>
 </head>
 <body>
-<table width="400px">
+<table width="400">
 <tr>
-    <td width="400px"><b>Old name Department</b></td>
+    <td width="400"><b>Old name Department</b></td>
 </tr>
 <tr>
-    <td width="40px" height="60px"><b>ID</b></td>
-    <td width="40px">${dep.id}</td>
-    <td width="320px">${dep.name}</td>
+    <td width="40" height="60px"><b>ID</b></td>
+    <td width="40">${dep.id}</td>
+    <td width="320">${dep.name}</td>
 </tr>
 <tr>
     <td width="400px"><b>New name Departmen!!!</b></td>
 </tr>
-</table><br/>
-<form:form method="post" action ="/depSave">
-    <input width="200px" type="text" name = "departmentName" >
-    <input width="200" type = "submit" value ="Create new Name">
-    <input width="0" type="hidden" name = "id" value="${dep.id}">
-</form:form>
+<tr>
+    <td>
+    <form:form method="post" action ="/depSave">
+        <input width="200px" type="text" name = "departmentName" >
+        <input width="200px" type = "submit" value ="Create new Name">
+        <input width="0px" type="hidden" name = "id" value="${empl.id}">
+        <input type="hidden" name="depID" value="${depID}"/>
+    </form:form>
+    </td>
+</tr>
+</table>
+
 <%--<a href="/depSave?id=${dep.id}"/>--%>
 </body>
 </html>
