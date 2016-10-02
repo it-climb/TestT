@@ -9,8 +9,24 @@
     <td><b>Name</b></td>
   </tr>
   <c:forEach var="department" items="${departments}">
+
     <tr>
       <td>${department.name}</td>
+
+      <td>
+        <form action="/edit" method="post">
+          <input type="text" size="30">
+          <input type="hidden" name="name" value="${department.name}">
+          <input type="submit" name="id" value="${department.id}">
+        </form>
+      </td>
+
+      <td>
+        <form action="/delete" method="post">
+      <input type="submit" name="id" value="${department.id}">
+      </form>
+      </td>
+
       <%--<td><a href="/depAdd?id=${contact.id}">Edit</a> | <a href="/delete?id=${contact.id}">Delete</a></td>--%>
     </tr>
   </c:forEach>

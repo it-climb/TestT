@@ -1,5 +1,4 @@
 package evg.testt.controller;
-
 import evg.testt.model.Contact;
 import evg.testt.service.ContactService;
 import evg.testt.util.JspPath;
@@ -15,15 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * Created on 9/10/15.
- */
 @Controller
 public class MainController {
 
     @Autowired
     private ContactService contactService;
-
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView showAll(HttpServletRequest request, HttpServletResponse response) {
@@ -32,6 +27,11 @@ public class MainController {
         HttpSession session = request.getSession();
         return new ModelAndView(JspPath.HOME);
     }
+
+    @RequestMapping(value = "/depEdit", method = RequestMethod.GET)
+    public ModelAndView toDepartments (){
+        return new ModelAndView(JspPath.DEPARTMENT_ALL);
+     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView showAddForm() {

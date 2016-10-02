@@ -1,26 +1,104 @@
 package evg.testt.model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.Entity;
+import java.util.Date;
 
 @Entity(name = "employees")
 public class Employee extends BaseModel{
 
-    private String firstName;
-    private String secondName;
+    private String name;
+    private String surname;
+//    private String patronymic;
+//
+//    @Type(type="date")
+//    private Date birtday;
+//    private String tel_number;
+//    private String mail;
+//    private String department;
+//    private String position;
+//
+//    @Type(type="date")
+//    private Date date_of_registration;
+//    private String current_project;
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public String getSurname() {
+        return surname;
     }
 
-    public String getSecondName() {
-        return secondName;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
-    }
+//    public String getPatronymic() {
+//        return patronymic;
+//    }
+//
+//    public void setPatronymic(String patronymic) {
+//        this.patronymic = patronymic;
+//    }
+//
+//    public Date getBirtday() {
+//        return birtday;
+//    }
+//
+//    public void setBirtday(Date birtday) {
+//        this.birtday = birtday;
+//    }
+//
+//    public String getTel_number() {
+//        return tel_number;
+//    }
+//
+//    public void setTel_number(String tel_number) {
+//        this.tel_number = tel_number;
+//    }
+//
+//    public String getMail() {
+//        return mail;
+//    }
+//
+//    public void setMail(String mail) {
+//        this.mail = mail;
+//    }
+//
+//    public String getDepartment() {
+//        return department;
+//    }
+//
+//    public void setDepartment(String department) {
+//        this.department = department;
+//    }
+//
+//    public String getPosition() {
+//        return position;
+//    }
+//
+//    public void setPosition(String position) {
+//        this.position = position;
+//    }
+//
+//    public Date getDate_of_registration() {
+//        return date_of_registration;
+//    }
+//
+//    public void setDate_of_registration(Date birtday) {
+//        this.date_of_registration = date_of_registration;
+//    }
+//
+//    public String getCurrent_project() {
+//        return current_project;
+//    }
+//
+//    public void setCurrent_project(String current_project) {
+//        this.current_project = current_project;
+//    }
 }

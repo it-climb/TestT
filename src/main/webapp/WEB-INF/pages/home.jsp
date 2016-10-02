@@ -1,16 +1,15 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: user
-  Date: 9/28/15
-  Time: 6:49 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-  <title>Hello world</title>
-</head>
-<body>
-  Home World !
-</body>
+  <head>
+      <link rel="stylesheet" href="../resources/css/home.css" type="text/css">
+      <title>Main page</title>
+  </head>
+  <body>
+    <div id="mainButton">
+        <form:form action="/depEdit" method="get">
+            <button id="button" type = "submit" name = "todepartments">Departments</button>
+        </form:form>
+    </div>
+  </body>
 </html>

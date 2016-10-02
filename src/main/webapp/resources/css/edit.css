@@ -1,0 +1,16 @@
+body{
+    background: rgb(72,65,96);
+}
+
+#departments{
+
+    width: 200px;
+    display: block;
+    padding: 10px 20px auto auto;
+}
+
+#employees{
+
+    width: 200px;
+    display: block;
+}
