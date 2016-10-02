@@ -49,7 +49,7 @@ public class DepartmentController {
         }
         return "redirect:/dep";
     }
-    @RequestMapping(value = "/depDel", method = RequestMethod.GET)
+    @RequestMapping(value = "/depDel", method = RequestMethod.POST)
     public String delDep(@RequestParam(required = true) Integer id) {
         try {
             Department delDepartment = departmentService.getById(id);
@@ -59,5 +59,4 @@ public class DepartmentController {
         }
         return "redirect:/dep";
     }
-
 }
