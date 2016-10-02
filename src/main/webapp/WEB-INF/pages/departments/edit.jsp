@@ -9,7 +9,8 @@
     <table>
         <tr>
             <td>Name:</td>
-            <td><input type="text" name="name"/></td>
+            <td><input type="text" name="name" value="${department.name}"/></td>
+            <td><input type="hidden" name="id" value="${department.id}"></td>
         </tr>
         <tr>
             <td colspan="2">

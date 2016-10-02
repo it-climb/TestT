@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.List;
 
 import java.sql.SQLException;
+import java.util.jar.Attributes;
 
 @Controller
 public class DepartmentController {
@@ -34,17 +35,34 @@ public class DepartmentController {
     }
 
     @RequestMapping(value = "/depAdd", method = RequestMethod.GET)
-    public ModelAndView showAdd() {
+    public ModelAndView showAdd(@RequestParam(required = false) Integer id) {
+       if (id != null){
+            try {
+                Department updateDepartment = departmentService.getById(id);
+                return new ModelAndView(JspPath.DEPARTMENT_ADD, "department", updateDepartment);
+            }
+            catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
         return new ModelAndView(JspPath.DEPARTMENT_ADD);
     }
 
     @RequestMapping(value = "/depSave", method = RequestMethod.POST)
-    public String addNewOne(@RequestParam(required = true) String name) {
-        Department addedDepartment = new Department();
-        addedDepartment.setName(name);
+    public String addNewOne(@RequestParam(required = true) String name,@RequestParam(required = false) Integer id) {
         try {
-            departmentService.insert(addedDepartment);
-        } catch (SQLException e) {
+            if (id != null) {
+                Department addedDepartment = new Department();
+                addedDepartment.setName(name);
+                departmentService.insert(addedDepartment);
+            }
+            else{
+                Department updateDepartment = departmentService.getById(id);
+                updateDepartment.setName(name);
+                departmentService.update(updateDepartment);
+            }
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
         return "redirect:/dep";

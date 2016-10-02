@@ -24,7 +24,6 @@ public class MainController {
     @Autowired
     private ContactService contactService;
 
-
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView showAll(HttpServletRequest request, HttpServletResponse response) {
         //ModelAndView modelAndView = new ModelAndView("contacts/all");
@@ -60,5 +59,4 @@ public class MainController {
         contactService.remove(id);
         return "redirect:/";
     }
-
 }

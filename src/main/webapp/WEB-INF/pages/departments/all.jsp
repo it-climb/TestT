@@ -12,8 +12,10 @@
     <tr>
       <td>${department.name}</td>
       <td>
-        <form method="post" action="/editDep">
-          <button type="submit" value="${department.id}">Edit</button>
+        <form method="get" action="/depAdd">
+          <input type="hidden" name="id" value="${department.id}"/>
+          <input type="hidden" name="name" value="${department.name}"/>
+          <input type="submit" value="Edit"/>
         </form>
       </td>
       <td>
@@ -26,7 +28,10 @@
   </c:forEach>
   <tr>
     <td colspan="5">
-      <a href="/depAdd">Add new one</a>
+      <form method="get" action="/depAdd">
+        <input type="hidden" name="id" value="${null}"/>
+        <input type="submit" value="Insert new Department"/>
+      </form>
     </td>
   </tr>
 </table>
