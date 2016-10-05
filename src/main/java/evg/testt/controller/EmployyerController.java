@@ -21,9 +21,7 @@ public class EmployyerController {
 
     @RequestMapping(value = "/employeer/edit", method = RequestMethod.GET)
     public ModelAndView outPut(){
-
         List<Employee> employeers;
-
         try {
             employeers = employyerService.getAll();
         } catch (SQLException e) {

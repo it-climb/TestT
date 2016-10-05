@@ -1,0 +1,56 @@
+body{
+    background: #FCFCFC;
+    font-family: 'Freemono';
+    font-size: 18px;
+}
+
+.textInput{
+    border: 2px solid #434445;
+    border-radius: 10px;
+    width: 290px;
+    height: 25px;
+    background: #FCFCFC;
+    font-family: 'Freemono';
+    font-size: 18px;
+}
+
+.buttonInput{
+    cursor: pointer;
+    background: #313233;
+    border:0 none;
+    border-radius: 5px;
+    width: 80px;
+    height: 40px;
+    font-family: 'Freemono';
+    font-size: 18px;
+    color:  white;
+}
+
+.textInput:focus{
+    outline: none;
+}
+
+#textDiv{
+    display: inline-block;
+    margin-top: 80px ;
+    margin-left: 605px;
+}
+
+#inputs{
+    display: inline-block;
+    margin-top: 35px ;
+    margin-left: 510px;
+}
+
+#mailDiv{
+    margin-top: 10px ;
+}
+
+#telDiv{
+    margin-top: 10px
+}
+
+#buttonDiv{
+    margin-top: 50px ;
+    margin-left: 105px;
+}

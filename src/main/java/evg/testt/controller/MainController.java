@@ -30,8 +30,15 @@ public class MainController {
 
     @RequestMapping(value = "/depEdit", method = RequestMethod.GET)
     public ModelAndView toDepartments (){
-        return new ModelAndView(JspPath.DEPARTMENT_ALL);
+        return new ModelAndView(JspPath.DEPARTMENT_ADD);
      }
+
+    @RequestMapping(value = "/empEdit", method = RequestMethod.GET)
+    public ModelAndView toEmployee (){
+        return new ModelAndView(JspPath.EMPLOYEERS_ALL);
+    }
+
+
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView showAddForm() {

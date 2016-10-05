@@ -2,59 +2,66 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html class="no-js">
 <head>
+    <link rel="stylesheet" href="/resources/css/empEdit.css" type="text/css">
     <title>Edit</title>
 </head>
 <body>
+<form:form method="post" action="/depSave">
+    <div id="textDiv">
 
-<table width="600px">
-    <c:forEach var="employee" items="${employee}">
+        <p>employee</p>
+    </div>
+    <div id="inputs">
 
-        <tr>
-        <td>Name </td>
-        <td>${employee.name}</td>
-    </tr>
+        <div id="firstFive">
+            <div id="nameDiv">
+                <p>name: </p><input type="text" name="name" class="textInput"/>
+            </div>
 
-    <tr>
-        <td>Surname</td>
-        <td>${employee.surname}</td>
-    </tr>
-    <tr>
-        <td>Patronimyc </td>
-        <td>${employee.patronimyc}</td>
-    </tr>
+            <div id="surnameDiv">
+                <p>surname: </p><input type="text" name="surname" class="textInput"/>
+            </div>
 
-    <tr>
-        <td>Birthday</td>
-        <td>${employee.birthday}</td>
-    </tr>
-    <tr>
-        <td>Telephone</td>
-        <td>${employee.tel_number}</td>
-    </tr>
-    <tr>
-        <td>Mail</td>
-        <td>${employee.mail}</td>
-    </tr>
-    <tr>
-        <td>Department </td>
-        <td>${employee.department}</td>
-    </tr>
+            <div id="patronymicDiv">
+                <p>patronymic: </p><input type="text" name="patronymic" class="textInput"/>
+            </div>
 
-    <tr>
-        <td>Position</td>
-        <td>${employee.position}</td>
-    </tr>
-    <tr>
-        <td>Date of registration</td>
-        <td>${employee.date_of_registration}</td>
-    </tr>
+            <div id="mailDiv">
+                <p>mail: </p><input type="text" name="mail" class="textInput"/>
+            </div>
 
-    <tr>
-        <td>Current project</td>
-        <td>${employee.current_project}</td>
-    </tr>
-    </c:forEach>
-</table>
+            <div id="birthdayDiv">
+                <p>birthday: </p><input type="text" name="birthday" class="textInput"/>
+            </div>
+        </div>
+
+        <div id="secondFive">
+            <div id="telDiv">
+                <p>tel: </p><input type="text" name="tel" class="textInput"/>
+            </div>
+
+            <div id="positionDiv">
+                <p>position: </p><input type="text" name="position" class="textInput"/>
+            </div>
+
+            <div id="departmentDiv">
+                <p>department: </p><input type="text" name="department" class="textInput"/>
+            </div>
+
+            <div id="projectDiv">
+                <p>project: </p><input type="text" name="currentProject" class="textInput"/>
+            </div>
+
+            <div id="registrationDiv">
+                <p>registration: </p><input type="text" name="dateregistration" class="textInput"/>
+            </div>
+        </div>
+    </div>
+
+    <div id="buttonDiv">
+        <input type="submit" class="buttonInput" value="ok"/>
+    </div>
+</form:form>
 
 </body>
 </html>

@@ -2,14 +2,22 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
-      <link rel="stylesheet" href="../resources/css/home.css" type="text/css">
+      <link rel="stylesheet" href="/resources/css/home.css" type="text/css">
       <title>Main page</title>
   </head>
   <body>
-    <div id="mainButton">
+
         <form:form action="/depEdit" method="get">
-            <button id="button" type = "submit" name = "todepartments">Departments</button>
+            <div id="departmentDiv">
+                <button id="buttonDepartment" type = "submit" name = "todepartments">department</button>
+            </div>
         </form:form>
-    </div>
+
+
+        <form:form action="/empEdit" method="get">
+            <div id="employeeDiv">
+                <button id="buttonEmployee" type = "submit" name = "toemployee">employee</button>
+            </div>
+        </form:form>
   </body>
 </html>
