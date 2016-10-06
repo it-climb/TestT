@@ -35,7 +35,7 @@ public class MainController {
 
     @RequestMapping(value = "/empEdit", method = RequestMethod.GET)
     public ModelAndView toEmployee (){
-        return new ModelAndView(JspPath.EMPLOYEERS_ALL);
+        return new ModelAndView(JspPath.EMPLOYEERS_ADD);
     }
 
 

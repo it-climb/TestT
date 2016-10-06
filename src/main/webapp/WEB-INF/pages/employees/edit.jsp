@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html class="no-js">
 <head>
@@ -6,7 +7,8 @@
     <title>Edit</title>
 </head>
 <body>
-<form:form method="post" action="/depSave">
+<form:form method="post" action="/empSave">
+
     <div id="textDiv">
 
         <p>employee</p>
@@ -56,11 +58,14 @@
                 <p>registration: </p><input type="text" name="dateregistration" class="textInput"/>
             </div>
         </div>
+
+        <div id="buttonDiv">
+            <input type="submit" class="buttonInput"/>
+        </div>
+
     </div>
 
-    <div id="buttonDiv">
-        <input type="submit" class="buttonInput" value="ok"/>
-    </div>
+
 </form:form>
 
 </body>

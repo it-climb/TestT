@@ -9,7 +9,7 @@
 
         <form:form action="/depEdit" method="get">
             <div id="departmentDiv">
-                <button id="buttonDepartment" type = "submit" name = "todepartments">department</button>
+                <button id="buttonDepartment" type = "submit">department</button>
             </div>
         </form:form>
 

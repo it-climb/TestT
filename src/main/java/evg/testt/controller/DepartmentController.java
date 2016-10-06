@@ -20,7 +20,6 @@ public class DepartmentController {
 
     @Autowired
     DepartmentService departmentService;
-
     @RequestMapping(value = "/dep", method = RequestMethod.GET)
     public ModelAndView showAll() {
         List<Department> departments;
@@ -41,7 +40,9 @@ public class DepartmentController {
 
     @RequestMapping(value = "/depSave", method = RequestMethod.POST)
     public String addNewOne(@RequestParam(required = true) String name, String mail, String tel) {
+
         Department addedDepartment = new Department();
+
         addedDepartment.setName(name);
         addedDepartment.setMail(mail);
         addedDepartment.setTel(tel);

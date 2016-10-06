@@ -24,7 +24,7 @@
             </div>
 
             <div id="buttonDiv">
-                <input class="buttonInput" type="submit" value="ok">
+                <input class="buttonInput" type="submit">
             </div>
         </div>
 </form:form>

@@ -1,0 +1,15 @@
+body{
+    background: #FCFCFC;
+    font-family: 'Freemono';
+    font-size: 18px;
+}
+
+td{
+    display: inline-block;
+    margin-right: 30px;
+}
+
+tr{
+    display: block;
+    margin-top: 20px;
+}
