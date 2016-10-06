@@ -52,14 +52,14 @@ public class DepartmentController {
     public String addNewOne(@RequestParam(required = true) String name,@RequestParam(required = false) Integer id) {
         try {
             if (id != null) {
-                Department addedDepartment = new Department();
-                addedDepartment.setName(name);
-                departmentService.insert(addedDepartment);
-            }
-            else{
                 Department updateDepartment = departmentService.getById(id);
                 updateDepartment.setName(name);
                 departmentService.update(updateDepartment);
+            }
+            else{
+                Department addedDepartment = new Department();
+                addedDepartment.setName(name);
+                departmentService.insert(addedDepartment);
             }
         }
         catch (SQLException e) {

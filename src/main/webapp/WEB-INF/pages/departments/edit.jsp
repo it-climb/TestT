@@ -13,8 +13,11 @@
             <td><input type="hidden" name="id" value="${department.id}"></td>
         </tr>
         <tr>
+            <td>
+                <form:form method="post" action="/"
+            </td>
             <td colspan="2">
-                <input type="submit" />
+                <input type="submit" value="Update"/>
             </td>
         </tr>
     </table>

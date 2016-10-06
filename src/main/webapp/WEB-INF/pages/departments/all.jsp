@@ -19,6 +19,12 @@
         </form>
       </td>
       <td>
+        <form method="post" action="/empAll">
+          <input type="hidden" name="id" value="${department.id}"/>
+          <input type="submit" value="View Department"/>
+        </form>
+      </td>
+      <td>
         <form method="post" action="/depDel">
           <input type="hidden" name="id" value="${department.id}"/>
           <input type="submit" value="Delete"/>
