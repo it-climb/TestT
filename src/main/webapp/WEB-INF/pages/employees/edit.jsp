@@ -31,7 +31,7 @@
                 <input width="200px" type="text" name = "employeeFirstName">
                 <input width="200px" type="text" name = "employeeSecondName" >
                 <input width="200px" type = "submit" value ="Create new Name">
-                <input width="0px" type="hidden" name = "id" value="${empl.id}">
+                <input width="0px" type="hidden" name = "emplID" value="${empl.id}">
                 <input width="0px" type="hidden" name="depID" value=${depID}>
 
             </form:form>

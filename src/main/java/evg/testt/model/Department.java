@@ -1,8 +1,10 @@
 package evg.testt.model;
 
+import org.hibernate.annotations.Fetch;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "departments")
@@ -10,15 +12,22 @@ public class Department extends BaseModel{
 
     private String name;
 
-    @OneToMany
-    private List<Employee> DepEmployee = new ArrayList<>();
+    @OneToMany()
+    private List<Employee> depEmployee;
+
+    public Department() {
+    }
+
+    public Department(Integer id) {
+        this.id = id;
+    }
 
     public List<Employee> getDepEmployee() {
-        return DepEmployee;
+        return depEmployee;
     }
 
     public void setDepEmployee(List<Employee> depEmployee) {
-        DepEmployee = depEmployee;
+        this.depEmployee = depEmployee;
     }
 
     public String getName() {

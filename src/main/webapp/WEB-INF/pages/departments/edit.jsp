@@ -29,7 +29,7 @@
     <form:form method="post" action ="/depSave">
         <input width="200px" type="text" name = "departmentName" >
         <input width="200px" type = "submit" value ="Create new Name">
-        <input width="0px" type="hidden" name = "id" value="${empl.id}">
+        <input width="0px" type="hidden" name = "id" value="${dep.id}">
         <input type="hidden" name="depID" value="${depID}"/>
     </form:form>
     </td>

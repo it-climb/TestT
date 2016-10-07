@@ -1,5 +1,6 @@
 package evg.testt.controller;
 
+import evg.testt.model.Department;
 import evg.testt.model.Employee;
 import evg.testt.service.DepartmentService;
 import evg.testt.service.EmployeeService;
@@ -26,21 +27,18 @@ public class EmployeeController {
     EmployeeService employeeService;
 
     @RequestMapping(value = "/allEmplInDep", method = {RequestMethod.GET,  RequestMethod.POST})
-    public ModelAndView showAll(@RequestParam(required = true) Integer id) {
-        List<Employee> employees;
-        try {
-            employees = employeeService.getAll();
-        } catch (SQLException e) {
-            employees = Collections.emptyList();
-            e.printStackTrace();
-        }
+    public ModelAndView departmentsEmployees(@RequestParam(required = true) Integer depID) {
+
+        Department department = new Department(depID);
+        List<Employee> employees = employeeService.getByDepartment(department);
+
         ModelAndView modelAndView = new ModelAndView(JspPath.EMPLOYEE_ALL, "allEmplInDep", employees);
-        modelAndView.addObject("depID", id);
+        modelAndView.addObject("depID", depID);
         return modelAndView;
     }
 
     @RequestMapping(value = "/emplAdd", method = RequestMethod.POST)
-    public ModelAndView showAdd(@RequestParam(required = true)Integer depID) {
+    public ModelAndView showNewEmployeePage(@RequestParam(required = true)Integer depID) {
         ModelAndView modelAndView = new ModelAndView(JspPath.EMPLOYEE_ADD);
         modelAndView.addObject("depID", depID);
         return modelAndView;
@@ -50,7 +48,7 @@ public class EmployeeController {
     public String addNewOne(@RequestParam(required = true) String employeeFirstName, String employeeSecondName,Integer depID,
                             @RequestParam(required = false) Integer emplID) {
         Employee employee;
-        if(emplID ==null) {
+        if(emplID == null) {
             employee = new Employee();
             employee.setFirstName(employeeFirstName);
             employee.setSecondName(employeeSecondName);
@@ -73,7 +71,8 @@ public class EmployeeController {
                 e.printStackTrace();
             }
         }
-        return "redirect:/allEmplInDep?id="+depID;
+        return "redirect:/allEmplInDep?depID="+depID;
+
     }
     @RequestMapping(value = "/emplEdit", method = RequestMethod.POST)
     public ModelAndView EditOne (@RequestParam(required = true) Integer id, Integer depID){

@@ -16,12 +16,10 @@
             <td>${employee.firstName}</td>
             <td>${employee.secondName}</td>
             <td>${employee.id}</td>
-
             <td>
                 <form:form method ="post" action ="/emplDel">
                     <input type="submit" value="Delete" />
                     <input type="hidden" name = "id" value="${employee.id}">
-                    <input type="hidden" name = "depID" value="${depID}">
                 </form:form>
             </td>
             <td>
@@ -39,7 +37,6 @@
                 <input type="submit" value="Add new Empl">
                 <input type="hidden" name = "depID" value="${depID}">
             </form>
-
         </td>
     </tr>
 </table>
