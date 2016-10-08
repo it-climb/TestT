@@ -10,10 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
-
-import java.sql.SQLException;
 
 @Controller
 public class DepartmentController {
@@ -39,7 +38,7 @@ public class DepartmentController {
 
     }
 
-    @RequestMapping(value = "/depDelete", method = RequestMethod.GET)
+    @RequestMapping(value = "/depDelete", method = RequestMethod.POST)
     public String deleteDep(@RequestParam(required = true) Integer id) throws SQLException {
         Department deleteDepartment = new Department();
         deleteDepartment = departmentService.getById(id);
@@ -49,7 +48,7 @@ public class DepartmentController {
 
 
 
-    @RequestMapping(value = "/depEdit", method = RequestMethod.GET)
+    @RequestMapping(value = "/depEdit", method = RequestMethod.POST)
     public ModelAndView editDep(@RequestParam(required = true) Integer id) throws SQLException {
         Department editDepartment = new Department();
         editDepartment = departmentService.getById(id);
@@ -59,10 +58,6 @@ public class DepartmentController {
 
 
     }
-
-
-
-
 
 
     @RequestMapping(value = "/depSave", method = RequestMethod.POST)
@@ -95,6 +90,4 @@ public class DepartmentController {
 
 
     }
-
-
 }

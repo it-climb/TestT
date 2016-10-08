@@ -12,7 +12,7 @@
 </head>
 <body>
   Hello, World !
-  <p style="text-align: left"><a href="/dep">New department </a>
+  <p style="text-align: left"><a href="/dep">Departments </a>
 
 </body>
 </html>
