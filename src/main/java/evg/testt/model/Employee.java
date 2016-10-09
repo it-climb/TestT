@@ -1,6 +1,7 @@
 package evg.testt.model;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity(name = "employees")
@@ -9,7 +10,8 @@ public class Employee extends BaseModel{
 
 
     @ManyToOne
-    Department departments;
+    @JoinColumn(name="departments_id")
+    private Department departments;
 
     private String firstName;
     private String secondName;

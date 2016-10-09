@@ -17,7 +17,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Controller
-public class EmployeeController {
+public class EmployeeController{
     @Autowired
     EmployeeService employeeService;
 
@@ -26,7 +26,7 @@ public class EmployeeController {
 
 //--------------------------------------Страница Employees----------------------------------------
 
-    @RequestMapping(value = "/empl", method = RequestMethod.POST)
+    @RequestMapping(value = "/empl")
     public ModelAndView showAll(@RequestParam(required = true) Integer id) {
         List<Employee> employees;
         Department department = new Department();
@@ -39,15 +39,19 @@ public class EmployeeController {
             employees = Collections.emptyList();
             e.printStackTrace();
         }
-        return new ModelAndView(JspPath.EMPLOYEE_ALL, "employees", employees);
+        return new ModelAndView(JspPath.EMPLOYEE_ALL, "department", department);
     }
 
 
 //---------------------------------Добавление Employees-----------------------------------------------
 
     @RequestMapping(value = "/emplAdd", method = RequestMethod.POST)
-    public ModelAndView showAdd() {
-        return new ModelAndView(JspPath.EMPLOYEE_ADD);
+    public ModelAndView showAdd(@RequestParam(required = true) Integer idDep) throws SQLException {
+        Department addDepEmpl = new Department();
+        addDepEmpl = departmentService.getById(idDep);
+        ModelAndView mav = new ModelAndView(JspPath.EMPLOYEE_ADD);
+        mav.addObject("department", addDepEmpl);
+        return mav;
     }
 
 
@@ -55,23 +59,48 @@ public class EmployeeController {
 //----------------------------------Удаление Employees-------------------------------------------------
 
         @RequestMapping(value = "/emplDelete", method = RequestMethod.POST)
-    public String deleteDep(@RequestParam(required = true) Integer id) throws SQLException {
-        Employee deleteEmployee = new Employee();
-            deleteEmployee = employeeService.getById(id);
+    public String deleteEmpl(@RequestParam(required = true) Integer idDep,
+                             @RequestParam(required = true) Integer idEmpl) throws SQLException {
+
+            Department depEmplDel = new Department();
+            Employee deleteEmployee = new Employee();
+            List<Employee> employeeList;
+
+            depEmplDel = departmentService.getById(idDep);
+            deleteEmployee = employeeService.getById(idEmpl);
+            employeeList = depEmplDel.getEmployees();
+            employeeList.remove(deleteEmployee);
+            departmentService.update(depEmplDel);
             employeeService.delete(deleteEmployee);
-        return "redirect:/empl";
+
+        return "redirect:/empl?id="+idDep;
     }
+
 
 
 
     //------------------------------Изменение Employees----------------------------------------------
 
     @RequestMapping(value = "/emplEdit", method = RequestMethod.POST)
-    public ModelAndView editDep(@RequestParam(required = true) Integer id) throws SQLException {
-        Employee editEmployee = new Employee();
-        editEmployee = employeeService.getById(id);
+    public ModelAndView editEmpl(@RequestParam(required = true) Integer idDep,
+                                 @RequestParam(required = true) Integer idEmpl) throws SQLException {
+        Department editEmplDep = departmentService.getById(idDep);
+        Employee editEmployee = employeeService.getById(idEmpl);
+//        List<Employee> employeeList = editEmplDep.getEmployees();
 
-        return new ModelAndView(JspPath.EMPLOYEE_ADD, "editEmployee", editEmployee);
+//        editEmplDep = departmentService.getById(idDep);
+//        editEmployee = employeeService.getById(idEmpl);
+//        employeeList = editEmplDep.getEmployees();
+
+
+        ModelAndView mavEdit = new ModelAndView(JspPath.EMPLOYEE_ADD);
+
+
+        mavEdit.addObject("department", editEmplDep);
+        mavEdit.addObject("employee", editEmployee);
+//        employeeList.remove(editEmployee);
+//        departmentService.update(editEmplDep);
+        return mavEdit;
     }
 
 
@@ -80,28 +109,42 @@ public class EmployeeController {
 //------------------------------Сохранение Employees------------------------------------------------
 
     @RequestMapping(value = "/emplSave", method = RequestMethod.POST)
-    public String addNewOne(@RequestParam(required = true) String firstName, String secondName,
-                            @RequestParam(required = true) Integer id) throws SQLException {
+    public String addNewOne(@RequestParam(required = true) String firstName,
+                            @RequestParam(required = true) String secondName,
+                            @RequestParam(required = true) Integer idDep,
+                            @RequestParam(required = false) Integer idEmpl) throws SQLException {
 
-        if(id==null){
+        if(idEmpl==null){
             Employee addEmployee = new Employee();
+            Department depEmplSave = new Department();
+            depEmplSave = departmentService.getById(idDep);
+            addEmployee.setDepartments(depEmplSave);
             addEmployee.setFirstName(firstName);
             addEmployee.setSecondName(secondName);
 
             try {
                 employeeService.insert(addEmployee);
+                employeeService.update(addEmployee);
+                departmentService.update(depEmplSave);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            return "redirect:/empl";
+            return "redirect:/empl?id="+idDep;
 
         }else{
             Employee editEmployee = new Employee();
-            editEmployee = employeeService.getById(id);
+            Department editEmplDep = new Department();
+            editEmplDep = departmentService.getById(idDep);
+            editEmployee = employeeService.getById(idEmpl);
             editEmployee.setFirstName(firstName);
             editEmployee.setSecondName(secondName);
+            departmentService.update(editEmplDep);
             employeeService.update(editEmployee);
-            return "redirect:/empl";
+
+
+
+
+            return "redirect:/empl?id="+idDep;
         }}
 
 

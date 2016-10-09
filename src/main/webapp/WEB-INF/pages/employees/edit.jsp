@@ -1,16 +1,27 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: user
-  Date: 9/28/15
-  Time: 4:24 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title></title>
 </head>
 <body>
-
+<form:form method="post" action="/emplSave">
+    <table>
+        <tr>
+            <td>First name:</td>
+            <td><input type="text" name="firstName" value="${employee.firstName}"/></td>
+        <tr> </tr>
+        <td>Second name:</td>
+        <td><input type="text" name="secondName" value="${employee.secondName}"/></td>
+        </tr>
+        <td><input type="hidden" name = "idDep" value="${department.id}"/> </td>
+        <td><input type="hidden" name = "idEmpl" value="${employee.id}"/> </td>
+        <tr>
+            <td colspan="2">
+                <input type="submit"/>
+            </td>
+        </tr>
+    </table>
+</form:form>
 </body>
 </html>
