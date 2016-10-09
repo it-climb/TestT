@@ -11,6 +11,34 @@
     <title></title>
 </head>
 <body>
-
+    <table>
+        <form method="get" action="/empSave">
+            <tr>
+                <td>FirstName:</td>
+                <td>
+                    <input type="text" name="firstName" value="${employee.firstName}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>SecondName:</td>
+                <td>
+                    <input type="text" name="secondName" value="${employee.secondName}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="hidden" name="id" value="${employee.id}"/>
+                    <input type="submit" value="Insert new employee"/>
+                </td>
+            </tr>
+        </form>
+        <tr>
+            <td>
+                <form method="post" action="/dep">
+                    <input type="submit" value="View departments"/>
+                </form>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>

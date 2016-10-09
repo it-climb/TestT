@@ -14,7 +14,7 @@
         </tr>
         <tr>
             <td>
-                <form:form method="post" action="/"
+                <form:form method="post" action="/"></form:form>
             </td>
             <td colspan="2">
                 <input type="submit" value="Update"/>

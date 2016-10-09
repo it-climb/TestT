@@ -15,19 +15,19 @@
         <form method="get" action="/depAdd">
           <input type="hidden" name="id" value="${department.id}"/>
           <input type="hidden" name="name" value="${department.name}"/>
-          <input type="submit" value="Edit"/>
+          <input type="submit" value="Edit Department"/>
         </form>
       </td>
       <td>
-        <form method="post" action="/empAll">
+        <form method="get" action="/emp">
           <input type="hidden" name="id" value="${department.id}"/>
-          <input type="submit" value="View Department"/>
+          <input type="submit" value="View/Add Employees"/>
         </form>
       </td>
       <td>
         <form method="post" action="/depDel">
           <input type="hidden" name="id" value="${department.id}"/>
-          <input type="submit" value="Delete"/>
+          <input type="submit" value="Delete Department"/>
         </form>
       </td>
     </tr>
