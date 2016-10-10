@@ -19,5 +19,7 @@
         </tr>
     </table>
 </form:form>
+
+<a href="/dep"> <button> Back to list of departments </button> </a>
 </body>
 </html>

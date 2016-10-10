@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html class="no-js">
 <head>
-  <title>All</title>
+  <title>Departments</title>
 </head>
 <body>
 
@@ -23,21 +23,18 @@
       <td>${department.id}</td>
       <td>${department.name}</td>
       <td>
-            <%--<a href="/depDelete?id=${department.id}">Delete</a>--%>
             <form:form method="post" action="/depDelete">
               <input type="hidden" name="id" value="${department.id}">
              <input type="submit" value="delete">
              </form:form>
       </td>
       <td>
-            <%--<a href="/depEdit?id=${department.id}">Edit</a>--%>
             <form:form method="post" action="/depEdit">
             <input type="hidden" name="id" value="${department.id}">
             <input type="submit" value="edit">
             </form:form>
       </td>
       <td>
-            <%--<a href="/empl?id=${department.id}">Employees</a></td> --%>
             <form:form method="post" action="/empl">
             <input type="hidden" name="id" value="${department.id}">
             <input type="submit" value="employees">

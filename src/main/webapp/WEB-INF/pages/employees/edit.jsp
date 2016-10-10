@@ -23,5 +23,7 @@
         </tr>
     </table>
 </form:form>
+
+<a href="/empl"> <button> Back to employees of ${department.name} </button> </a>
 </body>
 </html>

@@ -8,11 +8,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-  <title>Hello world</title>
+  <title>Our project</title>
 </head>
+
 <body>
-  Hello, World !
-  <p style="text-align: left"><a href="/dep">Departments </a>
+   <strong>Go to list of </strong><a href="/dep">Departments</a>
+
+
 
 </body>
+
 </html>

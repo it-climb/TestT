@@ -8,7 +8,7 @@
 <body>
 
 <table border="1">
-    <caption> Department's employees</caption>
+    <caption>Employees of ${department.name} </caption>
     <tr>
         <th>id</th>
         <th>First name</th>
@@ -48,7 +48,9 @@
         <input type="submit" value="Add new employee">
 </form:form>
 
-<%--<a href="/emplAdd">Add new employee</a>--%>
+<a href="/dep"> <button> Back to list of departments </button> </a>
+
+
 
 
 </body>
