@@ -61,7 +61,8 @@ public class DepartmentController {
 
 
     @RequestMapping(value = "/depSave", method = RequestMethod.POST)
-    public String addNewOne(@RequestParam(required = true) String name, @RequestParam(required = false) Integer id) throws SQLException {
+    public String addNewOne(@RequestParam(required = true) String name,
+                            @RequestParam(required = false) Integer id) throws SQLException {
 
         if(id==null){
             Department addedDepartment = new Department();

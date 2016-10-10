@@ -86,20 +86,12 @@ public class EmployeeController{
                                  @RequestParam(required = true) Integer idEmpl) throws SQLException {
         Department editEmplDep = departmentService.getById(idDep);
         Employee editEmployee = employeeService.getById(idEmpl);
-//        List<Employee> employeeList = editEmplDep.getEmployees();
-
-//        editEmplDep = departmentService.getById(idDep);
-//        editEmployee = employeeService.getById(idEmpl);
-//        employeeList = editEmplDep.getEmployees();
-
 
         ModelAndView mavEdit = new ModelAndView(JspPath.EMPLOYEE_ADD);
 
-
         mavEdit.addObject("department", editEmplDep);
         mavEdit.addObject("employee", editEmployee);
-//        employeeList.remove(editEmployee);
-//        departmentService.update(editEmplDep);
+
         return mavEdit;
     }
 

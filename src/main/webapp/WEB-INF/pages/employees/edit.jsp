@@ -24,6 +24,8 @@
     </table>
 </form:form>
 
-<a href="/empl"> <button> Back to employees of ${department.name} </button> </a>
+
+<input type="button" onclick="history.back()" value="Back to employees of ${department.name}">
+
 </body>
 </html>

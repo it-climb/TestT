@@ -14,8 +14,7 @@ public class Department extends BaseModel{
     private String name;
 
 
-
-    //~-----------------------------------
+    //-----------------------------------------------------------------------------------------
     public String getName() {
         return name;
     }
@@ -23,6 +22,7 @@ public class Department extends BaseModel{
     public void setName(String name) {
         this.name = name;
     }
+
 
 
     public List<Employee> getEmployees() {
