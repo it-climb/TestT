@@ -2,6 +2,7 @@ package evg.testt.controller;
 
 import evg.testt.model.Department;
 import evg.testt.service.DepartmentService;
+import evg.testt.service.Validation;
 import evg.testt.util.JspPath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,10 +16,12 @@ import java.util.Collections;
 import java.util.List;
 
 @Controller
-public class DepartmentController {
+public class DepartmentController  {
 
     @Autowired
     DepartmentService departmentService;
+
+    Validation validation;
 
     @RequestMapping(value = "/dep", method = RequestMethod.GET)
     public ModelAndView showAll() {
@@ -37,6 +40,21 @@ public class DepartmentController {
         return new ModelAndView(JspPath.DEPARTMENT_ADD);
 
     }
+
+
+
+//-================================================================
+
+
+
+    @RequestMapping(value = "/depErr", method = RequestMethod.GET)
+    public ModelAndView showErr() {
+        return new ModelAndView(JspPath.DEPARTMENT_ERR);
+
+    }
+
+//================================================================
+
 
     @RequestMapping(value = "/depDelete", method = RequestMethod.POST)
     public String deleteDep(@RequestParam(required = true) Integer id) throws SQLException {
@@ -66,7 +84,14 @@ public class DepartmentController {
 
         if(id==null){
             Department addedDepartment = new Department();
-            addedDepartment.setName(name);
+
+
+            if(validation.validForDepartments(name)){
+                addedDepartment.setName(name);
+            }else {
+
+                return "redirect:/depErr";
+            }
 
             try {
                 departmentService.insert(addedDepartment);
