@@ -20,13 +20,14 @@
                 <form:form method ="post" action ="/emplDel">
                     <input type="submit" value="Delete" />
                     <input type="hidden" name = "id" value="${employee.id}">
+                    <input type="hidden" name = "depID" value="${department.id}">
                 </form:form>
             </td>
             <td>
                 <form:form method ="post" action ="/emplEdit">
                     <input type="submit" value="Edit" />
                     <input type="hidden" name = "id" value="${employee.id}">
-                    <input type="hidden" name = "depID" value="${depID}">
+                    <input type="hidden" name = "depID" value="${department.id}">
                 </form:form>
             </td>
         </tr>
@@ -35,7 +36,7 @@
         <td colspan="5">
             <form action="/emplAdd" method="post">
                 <input type="submit" value="Add new Empl">
-                <input type="hidden" name = "depID" value="${depID}">
+                <input type="hidden" name = "depID" value="${department.id}">
             </form>
         </td>
     </tr>

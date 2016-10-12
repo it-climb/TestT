@@ -33,7 +33,7 @@ public class EmployeeController {
         List<Employee> employees = employeeService.getByDepartment(department);
 
         ModelAndView modelAndView = new ModelAndView(JspPath.EMPLOYEE_ALL, "allEmplInDep", employees);
-        modelAndView.addObject("depID", depID);
+        modelAndView.addObject("department", department);
         return modelAndView;
     }
 
@@ -96,6 +96,6 @@ public class EmployeeController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return "redirect:/allEmplInDep?id="+depID;
+        return "redirect:/allEmplInDep?depID="+depID;
     }
 }

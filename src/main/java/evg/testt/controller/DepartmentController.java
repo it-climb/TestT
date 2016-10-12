@@ -31,7 +31,7 @@ public class DepartmentController {
             departments = Collections.emptyList();
             e.printStackTrace();
         }
-        return new ModelAndView(JspPath.DEPARTMENT_ALL, "dep", departments);
+        return new ModelAndView(JspPath.DEPARTMENT_ALL, "departments", departments);
     }
 
     @RequestMapping(value = "/depAdd", method = RequestMethod.GET)
@@ -63,7 +63,7 @@ public class DepartmentController {
         }
         return "redirect:/dep";
     }
-    @RequestMapping(value = "/depEdit", method = RequestMethod.POST)
+    @RequestMapping(value = "/depEdit", method = RequestMethod.GET)
     public ModelAndView EditOne (@RequestParam(required = true) Integer id){
         Department department = null;
 
