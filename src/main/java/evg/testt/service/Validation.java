@@ -11,4 +11,20 @@ public class Validation {
     }
 
 
+
+    public static boolean validForDepphone(String validPhoneString){
+        Pattern p = Pattern.compile(".+([0-9]{8,15})");
+        Matcher m = p.matcher(validPhoneString);
+
+        return m.matches();
+    }
+
+
+    public static boolean validForEmplName(String validNameEmpl){
+        Pattern p = Pattern.compile("([a-zA-Z]){1,12}");
+        Matcher m = p.matcher(validNameEmpl);
+        return m.matches();
+    }
+
+
 }

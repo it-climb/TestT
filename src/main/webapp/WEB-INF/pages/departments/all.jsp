@@ -12,6 +12,7 @@
   <tr>
     <th>id</th>
     <th>Name</th>
+    <th>Phone number</th>
     <th>Delete</th>
     <th>Edit</th>
     <th>Employees</th>
@@ -22,6 +23,7 @@
   <tr>
       <td>${department.id}</td>
       <td>${department.name}</td>
+      <td>${department.depPhone}</td>
       <td>
             <form:form method="post" action="/depDelete">
               <input type="hidden" name="id" value="${department.id}">

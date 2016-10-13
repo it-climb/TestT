@@ -4,6 +4,7 @@ import evg.testt.model.Department;
 import evg.testt.model.Employee;
 import evg.testt.service.DepartmentService;
 import evg.testt.service.EmployeeService;
+import evg.testt.service.Validation;
 import evg.testt.util.JspPath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,8 @@ public class EmployeeController{
 
     @Autowired
     DepartmentService departmentService;
+
+    Validation validation;
 
 //--------------------------------------Страница Employees----------------------------------------
 
@@ -97,7 +100,6 @@ public class EmployeeController{
 
 
 
-
 //------------------------------Сохранение Employees------------------------------------------------
 
     @RequestMapping(value = "/emplSave", method = RequestMethod.POST)
@@ -111,8 +113,19 @@ public class EmployeeController{
             Department depEmplSave = new Department();
             depEmplSave = departmentService.getById(idDep);
             addEmployee.setDepartments(depEmplSave);
-            addEmployee.setFirstName(firstName);
-            addEmployee.setSecondName(secondName);
+
+            if(Validation.validForEmplName(firstName)){
+                addEmployee.setFirstName(firstName);
+            }if(Validation.validForEmplName(secondName)) {
+                addEmployee.setSecondName(secondName);
+            } else {
+                return "redirect:/emplErr";
+            }
+
+
+
+
+
 
             try {
                 employeeService.insert(addEmployee);
@@ -139,9 +152,13 @@ public class EmployeeController{
             return "redirect:/empl?id="+idDep;
         }}
 
+//------------------------Cтраница ошибки-----------------------------------------------------------
 
+    @RequestMapping(value = "/emplErr", method = RequestMethod.GET)
+    public ModelAndView showErr() {
+        return new ModelAndView(JspPath.EMPLOYEE_ERR);
 
-
+    }
 
 
 

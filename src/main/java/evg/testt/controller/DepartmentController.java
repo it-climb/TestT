@@ -80,15 +80,20 @@ public class DepartmentController  {
 
     @RequestMapping(value = "/depSave", method = RequestMethod.POST)
     public String addNewOne(@RequestParam(required = true) String name,
+                            @RequestParam(required = true) String depPhone,
                             @RequestParam(required = false) Integer id) throws SQLException {
 
         if(id==null){
             Department addedDepartment = new Department();
 
 
-            if(validation.validForDepartments(name)){
+            if(Validation.validForDepartments(name)){
                 addedDepartment.setName(name);
-            }else {
+
+            }if(Validation.validForDepphone(depPhone)){
+                addedDepartment.setDepPhone(depPhone);
+            }
+            else {
 
                 return "redirect:/depErr";
             }
@@ -104,6 +109,7 @@ public class DepartmentController  {
             Department editDepartment = new Department();
             editDepartment = departmentService.getById(id);
             editDepartment.setName(name);
+            editDepartment.setDepPhone(depPhone);
             departmentService.update(editDepartment);
             return "redirect:/dep";
         }

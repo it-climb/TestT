@@ -16,7 +16,7 @@ public class Department extends BaseModel {
 //    @NotNull
 //    @Size(min = 3, max = 7, message = "Department name length must be more than three symbols")
     private String name;
-
+    private String depPhone;
 
 
     //-----------------------------------------------------------------------------------------
@@ -26,6 +26,15 @@ public class Department extends BaseModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+
+    public String getDepPhone() {
+        return depPhone;
+    }
+
+    public void setDepPhone(String depPhone) {
+        this.depPhone = depPhone;
     }
 
 
