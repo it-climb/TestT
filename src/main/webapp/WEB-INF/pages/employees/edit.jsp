@@ -27,6 +27,7 @@
             </tr>
             <tr>
                 <td>
+                    <input type="hidden" name="depId" value="${depId}"/>
                     <input type="hidden" name="id" value="${employee.id}"/>
                     <input type="submit" value="Insert new employee"/>
                 </td>
@@ -35,7 +36,7 @@
         <tr>
             <td>
                 <form method="post" action="/dep">
-                    <input type="submit" value="View departments"/>
+                    <input type="submit" value="View All Departments"/>
                 </form>
             </td>
         </tr>

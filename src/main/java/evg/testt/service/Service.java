@@ -16,5 +16,4 @@ public interface Service<T> {
     void insert(T o) throws SQLException;
 
     void update(T o) throws SQLException;
-
 }

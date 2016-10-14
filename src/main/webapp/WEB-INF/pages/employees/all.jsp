@@ -34,8 +34,9 @@
     <tr>
         <td>
             <form:form method="get" action="/empAdd">
-                <input type="hidden" name="id" value="${employee.id}"/>
-                <input type="submit" value="Insert new Employee"/>
+                <input type="hidden" name="depId" value="${depId}"/>
+                <input type="hidden" name="id" value="${null}"/>
+                <input type="submit" value="Insert new employee"/>
             </form:form>
         </td>
         <td>

@@ -20,7 +20,7 @@
       </td>
       <td>
         <form method="get" action="/emp">
-          <input type="hidden" name="id" value="${department.id}"/>
+          <input type="hidden" name="depId" value="${department.id}"/>
           <input type="submit" value="View/Add Employees"/>
         </form>
       </td>
