@@ -9,7 +9,7 @@ import java.util.List;
 @Entity(name = "departments")
 public class Department extends BaseModel{
 
-    @OneToMany(cascade = CascadeType.ALL,  fetch = FetchType.LAZY,  mappedBy = "department")
+    @OneToMany(fetch = FetchType.LAZY,  mappedBy = "department")
     List<Employee> employeeList;
 
     private String name;

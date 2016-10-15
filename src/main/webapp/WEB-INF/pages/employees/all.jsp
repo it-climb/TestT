@@ -6,6 +6,7 @@
     <title></title>
 </head>
 <body>
+<strong>Employees of selected department</strong>
 <table width="600px">
     <tr>
         <td><b>FirstName</b></td>

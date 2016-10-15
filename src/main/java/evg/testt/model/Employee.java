@@ -8,7 +8,7 @@ public class Employee extends BaseModel{
     private String firstName;
     private String secondName;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="departments_id")
     private Department department;
 

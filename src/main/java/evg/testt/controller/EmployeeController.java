@@ -35,7 +35,7 @@ public class EmployeeController {
         }
 
         ModelAndView mav = new ModelAndView(JspPath.EMPLOYEE_ALL);
-        mav.addObject("employee",employees);
+        mav.addObject("employees",employees);
         mav.addObject("depId",depId);
         return mav;
     }
@@ -74,6 +74,7 @@ public class EmployeeController {
                 updateEmployee.setDepartment(departmentService.getById(depId));
                 employeeService.insert(updateEmployee);
             }
+            departmentService.update(departmentService.getById(depId));
         }
         catch (SQLException e) {
             e.printStackTrace();
