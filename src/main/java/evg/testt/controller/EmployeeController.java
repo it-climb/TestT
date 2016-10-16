@@ -26,6 +26,7 @@ public class EmployeeController {
 
     @RequestMapping(value = "/emp", method = RequestMethod.GET)
     public ModelAndView showAll(@RequestParam(required = true) Integer depId) {
+        ModelAndView mav = new ModelAndView(JspPath.EMPLOYEE_ALL);
         List<Employee> employees;
         try {
             employees = departmentService.getById(depId).getEmployeeList();
@@ -33,8 +34,6 @@ public class EmployeeController {
             employees = Collections.emptyList();
             e.printStackTrace();
         }
-
-        ModelAndView mav = new ModelAndView(JspPath.EMPLOYEE_ALL);
         mav.addObject("employees",employees);
         mav.addObject("depId",depId);
         return mav;
@@ -42,24 +41,24 @@ public class EmployeeController {
 
     @RequestMapping(value = "/empAdd", method = RequestMethod.GET)
     public ModelAndView showAdd(@RequestParam(required = false) Integer id, @RequestParam(required = true) Integer depId) {
-
         ModelAndView mav = new ModelAndView(JspPath.EMPLOYEE_ADD);
         Employee addEmployee = new Employee();
         try {
             addEmployee = employeeService.getById(id);
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        finally {
-            mav.addObject("employee", addEmployee);
-            mav.addObject("depId", depId);
-            return mav;
-        }
+        catch (Exception e){}
+        mav.addObject("employee", addEmployee);
+        mav.addObject("depId", depId);
+        return mav;
     }
 
     @RequestMapping(value = "/empSave", method = RequestMethod.GET)
-    public String addNewOne(@RequestParam(required = true) String firstName, @RequestParam(required = true) String secondName, @RequestParam(required = false) Integer id, @RequestParam(required = true) Integer depId) {
+    public String addNewOne(@RequestParam(required = true) String firstName,
+                            @RequestParam(required = true) String secondName,
+                            @RequestParam(required = false) Integer id,
+                            @RequestParam(required = true) Integer depId) {
         Employee updateEmployee = new Employee();
         try {
             if (id != null) {
@@ -71,7 +70,7 @@ public class EmployeeController {
             else{
                 updateEmployee.setFirstName(firstName);
                 updateEmployee.setSecondName(secondName);
-                updateEmployee.setDepartment(departmentService.getById(depId));
+                updateEmployee.setDepartments(departmentService.getById(depId));
                 employeeService.insert(updateEmployee);
             }
             departmentService.update(departmentService.getById(depId));
@@ -81,14 +80,50 @@ public class EmployeeController {
         }
         return "redirect:/emp?depId="+depId;
     }
+
     @RequestMapping(value = "/empDel", method = RequestMethod.POST)
     public String delEmp(@RequestParam(required = true) Integer id) {
+        Integer depId = 0;
         try {
-            Employee delEmployee = employeeService.getById(id);
-            employeeService.delete(delEmployee);
+//
+//            Employee delEmployee = employeeService.getById(id);
+//
+//            Department department = delEmployee.getDepartments();
+//
+//            depId = department.getId();
+//
+//            List<Employee> employeeList = department.getEmployeeList();
+//
+//            employeeList.remove(delEmployee);
+//
+//            department.setEmployeeList(employeeList);
+//
+//
+////            Employee del2Employee = new Employee();
+////del2Employee.setId(16);
+////del2Employee.setFirstName("aaa");
+////del2Employee.setSecondName("bbb");
+////del2Employee.setDepartments(department);
+//            employeeService.delete(delEmployee);
+//            List<Employee> list = employeeService.getAll();
+//            for (Employee employee : list) {
+//                System.out.println("!!!!!!!!!!!!!!!!!!----"+employee.getFirstName());
+//            }
+//            departmentService.update(department);
+
+            Department depEmplDel = new Department();
+            Employee deleteEmployee = new Employee();
+            List<Employee> employeeList;
+
+            depEmplDel = departmentService.getById(1);
+            deleteEmployee = employeeService.getById(id);
+            employeeList = depEmplDel.getEmployeeList();
+            employeeList.remove(deleteEmployee);
+            departmentService.update(depEmplDel);
+            employeeService.delete(deleteEmployee);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return "redirect:/emp";
+        return "redirect:/emp?depId="+depId;
     }
 }
