@@ -2,6 +2,7 @@ package evg.testt.model;
 
 import org.hibernate.annotations.Fetch;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
@@ -12,7 +13,7 @@ public class Department extends BaseModel{
 
     private String name;
 
-    @OneToMany()
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "department")
     private List<Employee> depEmployee;
 
     public Department() {

@@ -15,7 +15,9 @@ public class Employee extends BaseModel{
     @JoinColumn(name = "department_id")
     private Department department;
 
+    public Employee(){
 
+    }
 
     public Department getDepartment() {
         return department;
