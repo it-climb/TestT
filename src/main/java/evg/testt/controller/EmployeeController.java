@@ -85,42 +85,19 @@ public class EmployeeController {
     public String delEmp(@RequestParam(required = true) Integer id) {
         Integer depId = 0;
         try {
-//
-//            Employee delEmployee = employeeService.getById(id);
-//
-//            Department department = delEmployee.getDepartments();
-//
-//            depId = department.getId();
-//
-//            List<Employee> employeeList = department.getEmployeeList();
-//
-//            employeeList.remove(delEmployee);
-//
-//            department.setEmployeeList(employeeList);
-//
-//
-////            Employee del2Employee = new Employee();
-////del2Employee.setId(16);
-////del2Employee.setFirstName("aaa");
-////del2Employee.setSecondName("bbb");
-////del2Employee.setDepartments(department);
-//            employeeService.delete(delEmployee);
-//            List<Employee> list = employeeService.getAll();
-//            for (Employee employee : list) {
-//                System.out.println("!!!!!!!!!!!!!!!!!!----"+employee.getFirstName());
-//            }
-//            departmentService.update(department);
 
-            Department depEmplDel = new Department();
-            Employee deleteEmployee = new Employee();
-            List<Employee> employeeList;
+            Employee delEmployee = employeeService.getById(id);
 
-            depEmplDel = departmentService.getById(1);
-            deleteEmployee = employeeService.getById(id);
-            employeeList = depEmplDel.getEmployeeList();
-            employeeList.remove(deleteEmployee);
-            departmentService.update(depEmplDel);
-            employeeService.delete(deleteEmployee);
+            Department department = delEmployee.getDepartments();
+
+            depId = department.getId();
+
+            List<Employee> employeeList = department.getEmployeeList();
+
+            employeeList.remove(delEmployee);
+
+            departmentService.update(department);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
