@@ -77,14 +77,16 @@ public class DepartmentController {
         return modelAndView;
     }
     @RequestMapping(value = "/depDel", method = RequestMethod.POST)
-    public String delOne(@RequestParam(required = true) Integer id) {
-        Department department = new Department();
-        department.setId(id);
-        try {
-            departmentService.delete(department);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public String delOne(@RequestParam(required = true) Integer id) throws SQLException {
+//        Department department = new Department();
+//        department.setId(id);
+//        try {
+//            departmentService.delete(department);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return "redirect:/dep";
+        departmentService.delete(departmentService.getById(id));
         return "redirect:/dep";
     }
 }
