@@ -7,14 +7,14 @@ import java.util.List;
 
 @Transactional
 public interface Service<T> {
-    List<T> getAll() throws SQLException;
+    List<T> getAll();
 
-    T getById(Integer id) throws SQLException;
+    T getById(Integer id);
 
-    void delete(T o) throws SQLException;
+    void delete(T o);
 
-    void insert(T o) throws SQLException;
+    void insert(T o);
 
-    void update(T o) throws SQLException;
+    void update(T o);
 
 }

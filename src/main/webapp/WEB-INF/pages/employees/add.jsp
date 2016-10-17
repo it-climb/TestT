@@ -16,7 +16,7 @@
         <tr>
             <td>SecondName:</td>
             <td><input type="text" name="employeeSecondName" placeholder="Иванов" autofocus required/></td>
-
+            <td><input type="hidden" name="depID" value="${depID}"/></td>
         </tr>
         <%--<tr>--%>
             <%--<td>Phone:</td>--%>
@@ -25,7 +25,7 @@
         <%--<tr>--%>
             <%--<td>E-mail:</td>--%>
             <%--<td><input type="text" name="employeeEmail" placeholder="user@gmail.com" autofocus required/></td>--%>
-            <%--<td><input type="hidden" name="depID" value="${depID}"/></td>--%>
+
         <%--</tr>--%>
     </table>
     <form>

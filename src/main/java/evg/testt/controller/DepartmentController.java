@@ -25,12 +25,8 @@ public class DepartmentController {
     @RequestMapping(value = "/dep", method = RequestMethod.GET)
     public ModelAndView showAll() {
         List<Department> departments;
-        try {
-            departments = departmentService.getAll();
-        } catch (SQLException e) {
-            departments = Collections.emptyList();
-            e.printStackTrace();
-        }
+        departments = departmentService.getAll();
+
         return new ModelAndView(JspPath.DEPARTMENT_ALL, "departments", departments);
     }
 
@@ -46,47 +42,26 @@ public class DepartmentController {
         if(id==null) {
             department = new Department();
             department.setName(departmentName);
-            try {
-                departmentService.insert(department);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            departmentService.insert(department);
         }else {
-
-            try {
-                department = departmentService.getById(id);
-                department.setName(departmentName);
-                departmentService.update(department);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            department = departmentService.getById(id);
+            department.setName(departmentName);
+            departmentService.update(department);
         }
         return "redirect:/dep";
     }
     @RequestMapping(value = "/depEdit", method = RequestMethod.GET)
     public ModelAndView EditOne (@RequestParam(required = true) Integer id){
         Department department = null;
-
-        try {
-            department = departmentService.getById(id);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        department = departmentService.getById(id);
         ModelAndView modelAndView = new ModelAndView(JspPath.DEPARTMENT_EDIT);
         modelAndView.addObject("dep", department);
         return modelAndView;
     }
     @RequestMapping(value = "/depDel", method = RequestMethod.POST)
-    public String delOne(@RequestParam(required = true) Integer id) throws SQLException {
-//        Department department = new Department();
-//        department.setId(id);
-//        try {
-//            departmentService.delete(department);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return "redirect:/dep";
-        departmentService.delete(departmentService.getById(id));
+    public String delOne(@RequestParam(required = true) Integer id) {
+        Department department = departmentService.getById(id);
+        departmentService.delete(department);
         return "redirect:/dep";
     }
 }

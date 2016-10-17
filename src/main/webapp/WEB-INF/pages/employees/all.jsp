@@ -4,6 +4,7 @@
 <html>
 <head>
     <title></title>
+    <link rel="stylesheet" type="text/css" href="/resources/Styles/employees/AllEmpl.css">
 </head>
 <center>
 <table width="600px">
@@ -14,7 +15,7 @@
     </tr>
     <c:forEach var="employee" items="${allEmplInDep}">
         <tr>
-            <td>${department.id}</td>
+
             <td>${employee.id}</td>
             <td>${employee.firstName}</td>
             <td>${employee.secondName}</td>

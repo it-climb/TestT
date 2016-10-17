@@ -29,7 +29,7 @@ public class EmployeeController {
     @RequestMapping(value = "/allEmplInDep", method = {RequestMethod.GET,  RequestMethod.POST})
     public ModelAndView departmentsEmployees(@RequestParam(required = true) Integer depID) {
 
-        Department department = new Department(depID);
+        Department department = departmentService.getById(depID);
         List<Employee> employees = employeeService.getByDepartment(department);
 
         ModelAndView modelAndView = new ModelAndView(JspPath.EMPLOYEE_ALL, "allEmplInDep", employees);
@@ -50,23 +50,14 @@ public class EmployeeController {
         Employee employee;
         if(emplID == null) {
             employee = new Employee();
-
             employee.setFirstName(employeeFirstName);
             employee.setSecondName(employeeSecondName);
 //            employee.setPhone(employeePhone);
 //            employee.setEmail(employeeEmail);
-
-            try {
-                employee.setDepartment(departmentService.getById(depID));
-                employeeService.insert(employee);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            employee.setDepartment(departmentService.getById(depID));
+            employeeService.insert(employee);
         }else {
-
-            try {
-                employee = employeeService.getById(emplID);
-
+            employee = employeeService.getById(emplID);
                 employee.setFirstName(employeeFirstName);
                 employee.setSecondName(employeeSecondName);
 //                employee.setPhone(employeePhone);
@@ -74,9 +65,6 @@ public class EmployeeController {
 
                 departmentService.update(departmentService.getById(depID));
                 employeeService.update(employee);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return "redirect:/allEmplInDep?depID="+depID;
 
@@ -84,12 +72,7 @@ public class EmployeeController {
     @RequestMapping(value = "/emplEdit", method = RequestMethod.POST)
     public ModelAndView EditOne (@RequestParam(required = true) Integer id, Integer depID){
         Employee employee = null;
-
-        try {
-            employee = employeeService.getById(id);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        employee = employeeService.getById(id);
         ModelAndView modelAndView = new ModelAndView(JspPath.EMPLOYEE_EDIT, "empl", employee);
         modelAndView.addObject("depID", depID);
         return modelAndView;
@@ -98,11 +81,7 @@ public class EmployeeController {
     public String delOne(@RequestParam(required = true) Integer id, Integer depID) {
         Employee employee = new Employee();
         employee.setId(id);
-        try {
-            employeeService.delete(employee);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        employeeService.delete(employee);
         return "redirect:/allEmplInDep?depID="+depID;
     }
 }

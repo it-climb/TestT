@@ -16,23 +16,23 @@ public abstract class BaseService <T , P extends JpaRepository<T,Integer>> imple
         this.dao = dao;
     }
 
-    public List<T> getAll() throws SQLException {
+    public List<T> getAll()  {
         return dao.findAll();
     }
 
-    public T getById(Integer id) throws SQLException {
+    public T getById(Integer id) {
         return dao.findOne(id);
     }
 
-    public void delete(T o) throws SQLException {
+    public void delete(T o) {
         dao.delete(o);
     }
 
-     public void insert(T o) throws SQLException {
+     public void insert(T o) {
         dao.save(o);
     }
 
-    public void update(T o) throws SQLException {
+    public void update(T o)  {
         dao.save(o);
     }
 }

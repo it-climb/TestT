@@ -14,7 +14,7 @@ public class Department extends BaseModel{
 
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "department")
+    @OneToMany(mappedBy = "department", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Employee> depEmployee;
 
     public Department() {
