@@ -43,15 +43,18 @@ public class EmployeeController {
         modelAndView.addObject("depID", depID);
         return modelAndView;
     }
-
+//if "emplID != null -> Create new Employye, elle Edit Employee
     @RequestMapping(value = "/emplSave", method = RequestMethod.POST)
-    public String addNewOne(@RequestParam(required = true) String employeeFirstName, String employeeSecondName,Integer depID,
+    public String addNewOne(@RequestParam(required = true) String employeeFirstName, String employeeSecondName, Integer depID,
                             @RequestParam(required = false) Integer emplID) {
         Employee employee;
         if(emplID == null) {
             employee = new Employee();
+
             employee.setFirstName(employeeFirstName);
             employee.setSecondName(employeeSecondName);
+//            employee.setPhone(employeePhone);
+//            employee.setEmail(employeeEmail);
 
             try {
                 employee.setDepartment(departmentService.getById(depID));
@@ -63,8 +66,12 @@ public class EmployeeController {
 
             try {
                 employee = employeeService.getById(emplID);
+
                 employee.setFirstName(employeeFirstName);
                 employee.setSecondName(employeeSecondName);
+//                employee.setPhone(employeePhone);
+//                employee.setEmail(employeeEmail);
+
                 departmentService.update(departmentService.getById(depID));
                 employeeService.update(employee);
             } catch (SQLException e) {

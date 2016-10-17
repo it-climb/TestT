@@ -5,17 +5,19 @@
 <head>
     <title></title>
 </head>
+<center>
 <table width="600px">
+    <caption>Employees</caption>
     <tr>
-        <td><b>DepName</b></td>
-        <td><b>DepID</b></td>
+        <th>${department.id}</th>
+        <th>${department.name}</th>
     </tr>
     <c:forEach var="employee" items="${allEmplInDep}">
         <tr>
             <td>${department.id}</td>
+            <td>${employee.id}</td>
             <td>${employee.firstName}</td>
             <td>${employee.secondName}</td>
-            <td>${employee.id}</td>
             <td>
                 <form:form method ="post" action ="/emplDel">
                     <input type="submit" value="Delete" />
@@ -32,15 +34,13 @@
             </td>
         </tr>
     </c:forEach>
-    <tr>
-        <td colspan="5">
-            <form action="/emplAdd" method="post">
-                <input type="submit" value="Add new Empl">
-                <input type="hidden" name = "depID" value="${department.id}">
-            </form>
-        </td>
-    </tr>
 </table>
+    <form action="/emplAdd" method="post">
+        <input type="submit" value="Add new Employee">
+        <input type="hidden" name = "depID" value="${department.id}">
+    </form>
+    <a href="/dep"><button>Back to Departments</button></a>
+</center>
 <body>
 
 </body>

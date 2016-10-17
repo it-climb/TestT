@@ -5,18 +5,19 @@
     <title></title>
 </head>
 <body>
+<center>
 <form:form method="post" action="/depSave">
     <table>
+    <caption><b>New Department</b></caption>
         <tr>
-            <td>Name:</td>
-            <td><input type="text" name="departmentName"/></td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <input type="submit" />
-            </td>
+            <th>Name:</th>
+            <td><input type="text" name="departmentName" placeholder="Department's name" autofocus required/></td>
         </tr>
     </table>
+    <form>
+        <input type="submit" value="Create">
+    </form>
 </form:form>
+</center>
 </body>
 </html>

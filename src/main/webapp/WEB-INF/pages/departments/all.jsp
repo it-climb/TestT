@@ -3,12 +3,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-  <title></title>
+  <title>Departments</title>
+  <link rel="stylesheet" href="/resources/styles/departments/All.css" type="text/css">
 </head>
+<center>
 <table width="600px">
+  <caption>Departments</caption>
   <tr>
-    <td><b>DepID</b></td>
-    <td><b>DepName</b></td>
+    <th><b>DepID</b></th>
+    <th><b>DepName</b></th>
   </tr>
   <c:forEach var="department" items="${departments}">
     <tr>
@@ -34,15 +37,11 @@
       </td>
     </tr>
   </c:forEach>
-  <tr>
-    <td colspan="5">
-      <form action="/depAdd" method="get">
-        <input type="submit" value="Add new Dep">
-      </form>
-    </td>
-  </tr>
 </table>
+  <form action="/depAdd" method="get">
+    <input type="submit" value="Add new Dep">
+  </form>
+</center>
 <body>
-
 </body>
 </html>

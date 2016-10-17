@@ -9,6 +9,7 @@ import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity(name = "departments")
+
 public class Department extends BaseModel{
 
     private String name;
