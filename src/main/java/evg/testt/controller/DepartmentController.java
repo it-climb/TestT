@@ -38,7 +38,7 @@ public class DepartmentController {
     public ModelAndView showAdd() {
         return new ModelAndView(JspPath.DEPARTMENT_ADD);
     }
-
+//if "id" != null -> Create new Department, else Edit Department
     @RequestMapping(value = "/depSave", method = RequestMethod.POST)
     public String addNewOne(@RequestParam(required = true) String departmentName,
                             @RequestParam(required = false) Integer id) {
