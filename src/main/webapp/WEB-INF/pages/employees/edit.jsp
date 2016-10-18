@@ -16,28 +16,45 @@
     <form:form method="post" action ="/emplSave">
     <table width="400">
         <tr>
-            <td width="40">${empl.id}</td>
+            <td align="center">Empl ID</td>
+            <td align="center">${empl.id}</td>
+        </tr>
+        <tr>
+            <td align="center">Firtst Name:</td>
             <td>
                 <input width="200px" type="text" name = "employeeFirstName" placeholder="${empl.firstName}"
                        autofocus required>
             </td>
+        </tr>
+        <tr>
+            <td align="center">Second Name:</td>
             <td>
                 <input width="200px" type="text" name = "employeeSecondName" placeholder="${empl.secondName}"
                        autofocus required>
             </td>
+        </tr>
+        <tr>
+            <td align="center">Phone Number:</td>
             <td>
                 <input width="200px" type="text" name = "employeePhone" placeholder="${empl.phone}"
                        autofocus required>
             </td>
+        </tr>
+        <tr>
+            <td align="center">E-mail:</td>
             <td>
                 <input width="200px" type="text" name = "employeeEmail" placeholder="${empl.email}"
                        autofocus required>
             </td>
         </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <input width="200px" type = "submit" value ="Rename">
+                <input width="0px" type="hidden" name = "emplID" value="${empl.id}">
+                <input width="0px" type="hidden" name="depID" value=${depID}>
+            </td>
+        </tr>
     </table>
-        <input width="200px" type = "submit" value ="Rename">
-        <input width="0px" type="hidden" name = "emplID" value="${empl.id}">
-        <input width="0px" type="hidden" name="depID" value=${depID}>
     </form:form>
 </center>
 </body>

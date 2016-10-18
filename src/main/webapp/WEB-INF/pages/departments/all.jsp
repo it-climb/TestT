@@ -39,11 +39,11 @@
 </tr>
 </c:forEach>
 <tr>
+    <form:form action="/depAdd" method="get">
     <td colspan="5", align="center">
-        <form:form action="/depAdd" method="get">
            <input type="submit" value="Add new Dep">
-        </form:form>
     </td>
+    </form:form>
 </tr>
 </table>
 </center>
