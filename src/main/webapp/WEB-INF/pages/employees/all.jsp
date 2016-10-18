@@ -8,7 +8,7 @@
 </head>
 <center>
 <table>
-<caption>Employees</caption>
+<%--<caption>Employees</caption>--%>
 <tr>
     <th colspan="5">${department.id}  ${department.name}</th>
 </tr>
