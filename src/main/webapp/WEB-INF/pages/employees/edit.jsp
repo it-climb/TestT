@@ -25,14 +25,14 @@
                 <input width="200px" type="text" name = "employeeSecondName" placeholder="${empl.secondName}"
                        autofocus required>
             </td>
-            <%--<td>--%>
-                <%--<input width="200px" type="text" name = "employeePhone" placeholder="${empl.secondName}"--%>
-                       <%--autofocus required>--%>
-            <%--</td>--%>
-            <%--<td>--%>
-                <%--<input width="200px" type="text" name = "employeeEmail" placeholder="${empl.secondName}"--%>
-                       <%--autofocus required>--%>
-            <%--</td>--%>
+            <td>
+                <input width="200px" type="text" name = "employeePhone" placeholder="${empl.phone}"
+                       autofocus required>
+            </td>
+            <td>
+                <input width="200px" type="text" name = "employeeEmail" placeholder="${empl.email}"
+                       autofocus required>
+            </td>
         </tr>
     </table>
         <input width="200px" type = "submit" value ="Rename">

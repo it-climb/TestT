@@ -11,8 +11,8 @@
 <caption>Employees</caption>
 <tr>
     <th>${department.id}</th>
-    <th>${department.name}</th>
-    <th colspan="3"></th>
+    <th colspan="2">${department.name}</th>
+    <th colspan="2"></th>
 </tr>
 <c:forEach var="employee" items="${allEmplInDep}">
 <tr>
