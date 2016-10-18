@@ -45,23 +45,24 @@ public class EmployeeController {
     }
 //if "emplID != null -> Create new Employye, elle Edit Employee
     @RequestMapping(value = "/emplSave", method = RequestMethod.POST)
-    public String addNewOne(@RequestParam(required = true) String employeeFirstName, String employeeSecondName, Integer depID,
+    public String addNewOne(@RequestParam(required = true) String employeeFirstName, String employeeSecondName,
+                            Integer depID, String employeePhone, String employeeEmail,
                             @RequestParam(required = false) Integer emplID) {
         Employee employee;
         if(emplID == null) {
             employee = new Employee();
             employee.setFirstName(employeeFirstName);
             employee.setSecondName(employeeSecondName);
-//            employee.setPhone(employeePhone);
-//            employee.setEmail(employeeEmail);
+            employee.setPhone(employeePhone);
+            employee.setEmail(employeeEmail);
             employee.setDepartment(departmentService.getById(depID));
             employeeService.insert(employee);
         }else {
             employee = employeeService.getById(emplID);
                 employee.setFirstName(employeeFirstName);
                 employee.setSecondName(employeeSecondName);
-//                employee.setPhone(employeePhone);
-//                employee.setEmail(employeeEmail);
+                employee.setPhone(employeePhone);
+                employee.setEmail(employeeEmail);
 
                 departmentService.update(departmentService.getById(depID));
                 employeeService.update(employee);

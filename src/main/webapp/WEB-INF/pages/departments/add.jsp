@@ -8,7 +8,7 @@
 <center>
 <form:form method="post" action="/depSave">
     <table>
-    <caption><b>New Department</b></caption>
+    <caption>New Department</caption>
         <tr>
             <th>Name:</th>
             <td><input type="text" name="departmentName" placeholder="Department's name" autofocus required/></td>

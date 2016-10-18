@@ -7,40 +7,45 @@
   <link rel="stylesheet" href="/resources/styles/departments/All.css" type="text/css">
 </head>
 <center>
-<table width="600px">
-  <caption>Departments</caption>
-  <tr>
-    <th><b>DepID</b></th>
-    <th><b>DepName</b></th>
-  </tr>
-  <c:forEach var="department" items="${departments}">
-    <tr>
-      <td>${department.id}</td>
-      <td>${department.name}</td>
-      <td>
-        <form:form method ="post" action ="/depDel">
-          <input type="submit" value="Delete" />
-          <input type="hidden" name = "id" value="${department.id}">
+<table>
+<caption>Departments</caption>
+<tr>
+    <th align="center">DepID</th>
+    <th align="center">DepName</th>
+    <th colspan="3"></th>
+</tr>
+<c:forEach var="department" items="${departments}">
+<tr>
+    <td align="center">${department.id}</td>
+    <td align="center">${department.name}</td>
+    <form:form method ="post" action ="/depDel">
+    <td>
+        <input type="submit" value="Delete" />
+        <input type="hidden" name = "id" value="${department.id}">
+    </td>
+    </form:form>
+    <form:form method ="get" action ="/depEdit">
+    <td>
+        <input type="submit" value="Edit" />
+        <input type="hidden" name = "id" value="${department.id}">
+    </td>
+    </form:form>
+    <form:form method ="get" action ="/allEmplInDep">
+    <td>
+        <input type="submit" value="Employees" />
+        <input type="hidden" name = "depID" value="${department.id}">
+    </td>
+    </form:form>
+</tr>
+</c:forEach>
+<tr>
+    <td colspan="5", align="center">
+        <form:form action="/depAdd" method="get">
+           <input type="submit" value="Add new Dep">
         </form:form>
-      </td>
-      <td>
-        <form:form method ="get" action ="/depEdit">
-          <input type="submit" value="Edit" />
-          <input type="hidden" name = "id" value="${department.id}">
-        </form:form>
-      </td>
-      <td>
-        <form:form method ="get" action ="/allEmplInDep">
-          <input type="submit" value="Employees" />
-          <input type="hidden" name = "depID" value="${department.id}">
-        </form:form>
-      </td>
-    </tr>
-  </c:forEach>
+    </td>
+</tr>
 </table>
-  <form action="/depAdd" method="get">
-    <input type="submit" value="Add new Dep">
-  </form>
 </center>
 <body>
 </body>

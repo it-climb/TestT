@@ -10,6 +10,8 @@ public class Employee extends BaseModel{
 
     private String firstName;
     private String secondName;
+    private String phone;
+    private String email;
 
     @ManyToOne
     @JoinColumn(name = "department_id")
@@ -42,4 +44,21 @@ public class Employee extends BaseModel{
     public void setSecondName(String secondName) {
         this.secondName = secondName;
     }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
+

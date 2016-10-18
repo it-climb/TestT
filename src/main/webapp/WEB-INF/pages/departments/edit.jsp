@@ -13,22 +13,26 @@
 </head>
 <body>
 <center>
-<table width="400">
-<tr>
-    <td width="40" height="60px"><b>ID</b></td>
-    <td width="320"><b>Name</b></td>
-</tr>
-<tr>
-    <td width="40">${dep.id}</td>
-    <td>
+<table>
+    <tr>
+        <td><b>ID</b></td>
+        <td align="center"><b>Name</b></td>
+    </tr>
     <form:form method="post" action ="/depSave">
-        <input width="200px" type="text" name = "departmentName" placeholder="${dep.name}" autofocus required>
-        <input width="200px" type = "submit" value ="Rename">
+    <tr>
+        <td>${dep.id}</td>
+        <td>
+            <input type="text" name = "departmentName" placeholder="${dep.name}" autofocus required>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2", align="center">
+        <input type = "submit" value ="Rename">
         <input width="0px" type="hidden" name = "id" value="${dep.id}">
-        <%--<input type="hidden" name="depID" value="${depID}"/>--%>
+        </td>
+    </tr>
     </form:form>
-    </td>
-</tr>
+
 </table>
 </center>
 </body>
