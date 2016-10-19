@@ -19,6 +19,7 @@
             <td>
                 <form method="get" action="/empAdd">
                     <input type="hidden" name="id" value="${employee.id}"/>
+                    <input type="hidden" name="depId" value="${depId}"/>
                     <input type="hidden" name="firstName" value="${employee.firstName}"/>
                     <input type="hidden" name="secondName" value="${employee.secondName}"/>
                     <input type="submit" value="Edit Employee"/>

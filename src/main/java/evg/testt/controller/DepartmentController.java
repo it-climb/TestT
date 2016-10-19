@@ -3,6 +3,8 @@ package evg.testt.controller;
 import evg.testt.model.Department;
 import evg.testt.service.DepartmentService;
 import evg.testt.util.JspPath;
+import net.sf.oval.ConstraintViolation;
+import net.sf.oval.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,8 @@ import java.util.jar.Attributes;
 
 @Controller
 public class DepartmentController {
+
+    Validator validator = new Validator();
 
     @Autowired
     DepartmentService departmentService;
@@ -50,15 +54,29 @@ public class DepartmentController {
 
     @RequestMapping(value = "/depSave", method = RequestMethod.POST)
     public String addNewOne(@RequestParam(required = true) String name,@RequestParam(required = false) Integer id) {
+
+        List<ConstraintViolation> violations;
+
         try {
             if (id != null) {
                 Department updateDepartment = departmentService.getById(id);
                 updateDepartment.setName(name);
+                violations = validator.validate(updateDepartment);
+                if (violations.size() > 0){
+                    violations = null;
+                    return "redirect:/depAdd?id="+id;
+                }
+
                 departmentService.update(updateDepartment);
             }
             else{
                 Department addedDepartment = new Department();
                 addedDepartment.setName(name);
+                violations = validator.validate(addedDepartment);
+                if (violations.size() > 0){
+                    violations = null;
+                    return "redirect:/depAdd?id="+id;
+                }
                 departmentService.insert(addedDepartment);
             }
         }

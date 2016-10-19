@@ -1,16 +1,28 @@
 package evg.testt.model;
 
+import net.sf.oval.constraint.Length;
+import net.sf.oval.constraint.NotBlank;
+import net.sf.oval.constraint.NotNull;
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 
 @Entity(name = "employees")
 public class Employee extends BaseModel{
 
+    @NotNull(errorCode = "3", message = "Employee's name must be not null")
+    @NotBlank(errorCode = "2", message = "Employee's name must be not blank")
+    @Length(max = 30, min = 3, errorCode = "1", message = "Employee's first name must have from 3 to 30 chars")
     private String firstName;
+
+    @NotNull(errorCode = "3", message = "Employee's name must be not null")
+    @NotBlank(errorCode = "2", message = "Employee's name must be not blank")
+    @Length(max = 30, min = 3, errorCode = "1", message = "Employee's second name must have from 3 to 30 chars")
     private String secondName;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name="departments_id")
-    private Department department;
+    private Department departments;
 
     public String getFirstName() {
         return firstName;
@@ -26,10 +38,12 @@ public class Employee extends BaseModel{
         this.secondName = secondName;
     }
 
-    public Department getDepartment() {
-        return department;
+    public Department getDepartments() {
+        return departments;
     }
-    public void setDepartment(Department department) {
-        this.department = department;
+
+    public void setDepartments(Department departments) {
+        this.departments = departments;
     }
 }
+

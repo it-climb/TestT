@@ -5,6 +5,10 @@ import evg.testt.model.Employee;
 import evg.testt.service.DepartmentService;
 import evg.testt.service.EmployeeService;
 import evg.testt.util.JspPath;
+import net.sf.oval.ConstraintViolation;
+import net.sf.oval.Validator;
+import net.sf.oval.constraint.NotBlank;
+import net.sf.oval.constraint.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +22,8 @@ import java.util.List;
 
 @Controller
 public class EmployeeController {
+
+    Validator validator = new Validator();
 
     @Autowired
     EmployeeService employeeService;
@@ -48,7 +54,6 @@ public class EmployeeController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        catch (Exception e){}
         mav.addObject("employee", addEmployee);
         mav.addObject("depId", depId);
         return mav;
@@ -59,18 +64,32 @@ public class EmployeeController {
                             @RequestParam(required = true) String secondName,
                             @RequestParam(required = false) Integer id,
                             @RequestParam(required = true) Integer depId) {
+
         Employee updateEmployee = new Employee();
+
+        List<ConstraintViolation> violations;
+
         try {
             if (id != null) {
                 updateEmployee = employeeService.getById(id);
                 updateEmployee.setFirstName(firstName);
                 updateEmployee.setSecondName(secondName);
+                violations = validator.validate(updateEmployee);
+                if (violations.size() > 0){
+                    violations = null;
+                    return "redirect:/empAdd?depId="+depId;
+                }
                 employeeService.update(updateEmployee);
             }
             else{
                 updateEmployee.setFirstName(firstName);
                 updateEmployee.setSecondName(secondName);
                 updateEmployee.setDepartments(departmentService.getById(depId));
+                violations = validator.validate(updateEmployee);
+                if (violations.size() > 0){
+                    violations = null;
+                    return "redirect:/empAdd?depId="+depId;
+                }
                 employeeService.insert(updateEmployee);
             }
             departmentService.update(departmentService.getById(depId));
