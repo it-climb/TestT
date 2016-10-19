@@ -54,6 +54,7 @@ public class EmployeeController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        catch (Exception e){}
         mav.addObject("employee", addEmployee);
         mav.addObject("depId", depId);
         return mav;

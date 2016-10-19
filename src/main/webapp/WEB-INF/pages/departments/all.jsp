@@ -3,6 +3,9 @@
 <html class="no-js">
 <head>
   <title>All</title>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="//js/jquery.validate.min.js"></script>
+  <script src="//js/departments.js"></script>
 </head>
 <table width="600px">
   <tr>
