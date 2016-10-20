@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -18,6 +19,13 @@
         <input type="submit" value="Create">
     </form>
 </form:form>
+    <div>
+        <c:forEach var="violation" items="${violations}">
+            <p>
+                ${violation.message}
+            </p>
+        </c:forEach>
+    </div>
 </center>
 </body>
 </html>

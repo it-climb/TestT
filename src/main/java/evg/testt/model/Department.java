@@ -1,6 +1,9 @@
 package evg.testt.model;
 
-import org.hibernate.annotations.Fetch;
+import net.sf.oval.Validator;
+import net.sf.oval.constraint.Length;
+import net.sf.oval.constraint.MatchPattern;
+import net.sf.oval.constraint.NotNull;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -11,7 +14,9 @@ import java.util.List;
 @Entity(name = "departments")
 
 public class Department extends BaseModel{
-
+    @NotNull(message = "it's null", errorCode = "isNull")
+    @Length(min=3, max=15, message = "Error length", errorCode = "length")
+    @MatchPattern(pattern="[A-Z]{1}[a-z]{14}", message = "Error name, rename", errorCode = "notMuchPattern")
     private String name;
 
     @OneToMany(mappedBy = "department", fetch = FetchType.EAGER, cascade = CascadeType.ALL)

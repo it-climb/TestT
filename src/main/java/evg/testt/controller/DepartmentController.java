@@ -3,7 +3,10 @@ package evg.testt.controller;
 import evg.testt.model.Department;
 import evg.testt.service.DepartmentService;
 import evg.testt.util.JspPath;
+import net.sf.oval.ConstraintViolation;
+import net.sf.oval.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +23,10 @@ import java.sql.SQLException;
 public class DepartmentController {
 
     @Autowired
+    @Qualifier("ovalValidator")
+    Validator validator;
+
+    @Autowired
     DepartmentService departmentService;
 
     @RequestMapping(value = "/dep", method = RequestMethod.GET)
@@ -34,30 +41,40 @@ public class DepartmentController {
     public ModelAndView showAdd() {
         return new ModelAndView(JspPath.DEPARTMENT_ADD);
     }
-//if "id" != null -> Create new Department, else Edit Department
+
+    //if "id" != null -> Create new Department, else Edit Department
     @RequestMapping(value = "/depSave", method = RequestMethod.POST)
-    public String addNewOne(@RequestParam(required = true) String departmentName,
-                            @RequestParam(required = false) Integer id) {
+    public ModelAndView addNewOne(@RequestParam(required = true) String departmentName,
+                                  @RequestParam(required = false) Integer id) {
+        List<ConstraintViolation> violations;
         Department department;
-        if(id==null) {
+        if (id == null) {
             department = new Department();
             department.setName(departmentName);
-            departmentService.insert(department);
-        }else {
+            violations = validator.validate(department);
+
+            if (violations.size() == 0) {
+                departmentService.insert(department);
+            } else {
+                return new ModelAndView((JspPath.DEPARTMENT_ADD), "violations", violations);
+            }
+        } else {
             department = departmentService.getById(id);
             department.setName(departmentName);
             departmentService.update(department);
         }
-        return "redirect:/dep";
+        return new ModelAndView("redirect:/dep");
     }
+
     @RequestMapping(value = "/depEdit", method = RequestMethod.GET)
-    public ModelAndView EditOne (@RequestParam(required = true) Integer id){
+    public ModelAndView EditOne(@RequestParam(required = true) Integer id) {
         Department department = null;
         department = departmentService.getById(id);
         ModelAndView modelAndView = new ModelAndView(JspPath.DEPARTMENT_EDIT);
         modelAndView.addObject("dep", department);
         return modelAndView;
     }
+
     @RequestMapping(value = "/depDel", method = RequestMethod.POST)
     public String delOne(@RequestParam(required = true) Integer id) {
         Department department = departmentService.getById(id);
