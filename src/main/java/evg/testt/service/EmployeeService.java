@@ -10,4 +10,5 @@ import java.util.List;
  */
 public interface EmployeeService extends Service<Employee>{
     List<Employee> getByDepartment(Department department);
+    List<Employee> getBirthday ();
 }

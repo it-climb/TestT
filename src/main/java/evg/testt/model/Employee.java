@@ -1,6 +1,8 @@
 package evg.testt.model;
 
+import net.sf.oval.constraint.Length;
 import net.sf.oval.constraint.MatchPattern;
+import net.sf.oval.constraint.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -11,8 +13,17 @@ import java.util.Calendar;
 @Entity(name = "employees")
 public class Employee extends BaseModel{
 
+    @NotNull(message = "it's null", errorCode = "isNull")
+    @Length(min=2, max=30, message = "Error length", errorCode = "length")
+    @MatchPattern(pattern="^[a-zA-z0-9]{1,}", message = "Error First Name, rename", errorCode = "notMuchPattern")
     private String firstName;
+    @NotNull(message = "it's null", errorCode = "isNull")
+    @Length(min=2, max=30, message = "Error length", errorCode = "length")
+    @MatchPattern(pattern="^[a-zA-z0-9]{1,}", message = "Error Second Name, rename", errorCode = "notMuchPattern")
     private String secondName;
+    @NotNull(message = "it's null", errorCode = "isNull")
+    @Length(min=5, max=12, message = "Error length, try again", errorCode = "length")
+    @MatchPattern(pattern="^+[0-9]{1,}", message = "Error phone number, try again", errorCode = "notMuchPattern")
     private String phone;
 
     @MatchPattern(pattern = "^([a-z0-9]{1,}[\\.\\_\\-]?[a-z0-9]{1,})\\@([a-z0-9]{2,}\\.)([a-z]{2,2}|com|ru|ua)$", message = "Error e-mail!!! Try again")

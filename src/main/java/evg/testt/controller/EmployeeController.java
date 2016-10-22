@@ -1,6 +1,7 @@
 package evg.testt.controller;
 
 import com.sun.tracing.dtrace.ModuleAttributes;
+import evg.testt.dao.EmployeeDao;
 import evg.testt.model.Department;
 import evg.testt.model.Employee;
 import evg.testt.service.DepartmentService;
@@ -60,11 +61,12 @@ public class EmployeeController {
 
             vialations = validator.validate(employee);
 
-            if(vialations.size() == 0){
+            if(vialations.size() >= 0){
             employee.setDepartment(departmentService.getById(depID));
             employeeService.insert(employee);
             }else {
-                return new ModelAndView((JspPath.EMPLOYEE_ADD), "vialations", vialations);
+                ModelAndView modelAndView = new ModelAndView((JspPath.EMPLOYEE_ADD), "vialations", vialations);
+                return modelAndView.addObject("depID", depID);
             }
         }else {
                 departmentService.update(departmentService.getById(depID));
@@ -87,6 +89,16 @@ public class EmployeeController {
         employee.setId(id);
         employeeService.delete(employee);
         return "redirect:/allEmplInDep?depID="+depID;
+    }
+    @RequestMapping(value = "/birthday", method = RequestMethod.GET)
+    public ModelAndView Birhday(@RequestParam(required = true) Integer depID) {
+
+        Department department = departmentService.getById(depID);
+        List<Employee> birthday = employeeService.getBirthday();
+
+        ModelAndView modelAndView = new ModelAndView(JspPath.EMPLOYEE_Birthday, "birthday", birthday);
+        modelAndView.addObject("department", department);
+        return modelAndView;
     }
 
 

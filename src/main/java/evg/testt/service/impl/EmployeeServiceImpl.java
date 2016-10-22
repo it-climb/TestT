@@ -17,4 +17,10 @@ public class EmployeeServiceImpl extends BaseService<Employee, EmployeeDao> impl
     public List<Employee> getByDepartment(Department department) {
         return dao.findByDepartment(department);
     }
+    @Override
+    public List<Employee> getBirthday (){
+        List<Employee> Birthday= dao.Birthday();
+        return dao.Birthday();
+    }
+
 }
