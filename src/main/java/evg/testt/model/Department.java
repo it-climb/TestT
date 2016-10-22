@@ -15,8 +15,8 @@ import java.util.List;
 
 public class Department extends BaseModel{
     @NotNull(message = "it's null", errorCode = "isNull")
-    @Length(min=3, max=15, message = "Error length", errorCode = "length")
-    @MatchPattern(pattern="[A-Z]{1}[a-z]{14}", message = "Error name, rename", errorCode = "notMuchPattern")
+    @Length(min=2, max=30, message = "Error length", errorCode = "length")
+    @MatchPattern(pattern="^[a-zA-z0-9]{1,}", message = "Error name, rename", errorCode = "notMuchPattern")
     private String name;
 
     @OneToMany(mappedBy = "department", fetch = FetchType.EAGER, cascade = CascadeType.ALL)

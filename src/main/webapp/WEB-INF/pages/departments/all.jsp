@@ -18,6 +18,7 @@
 <tr>
     <td align="center">${department.id}</td>
     <td align="center">${department.name}</td>
+    <td align="center">${department.depEmployee.size()}</td>
     <form:form method ="post" action ="/depDel">
     <td>
         <input type="submit" value="Delete" />

@@ -22,30 +22,34 @@
         <tr>
             <td align="center">Firtst Name:</td>
             <td>
-                <input width="200px" type="text" name = "employeeFirstName" placeholder="${empl.firstName}"
-                       autofocus required>
+                <input type="text" name = "employeeFirstName" placeholder="${empl.firstName}" autofocus required>
             </td>
         </tr>
         <tr>
             <td align="center">Second Name:</td>
             <td>
-                <input width="200px" type="text" name = "employeeSecondName" placeholder="${empl.secondName}"
-                       autofocus required>
+                <input type="text" name = "employeeSecondName" placeholder="${empl.secondName}" autofocus required>
             </td>
         </tr>
         <tr>
             <td align="center">Phone Number:</td>
             <td>
-                <input width="200px" type="text" name = "employeePhone" placeholder="${empl.phone}"
-                       autofocus required>
+                <input type="text" name = "employeePhone" placeholder="${empl.phone}" autofocus required>
             </td>
         </tr>
         <tr>
             <td align="center">E-mail:</td>
             <td>
-                <input width="200px" type="text" name = "employeeEmail" placeholder="${empl.email}"
-                       autofocus required>
+                <input type="text" name = "employeeEmail" placeholder="${empl.email}" autofocus required>
             </td>
+        </tr>
+        <tr>
+            <td align="center">Date of Birth:</td>
+            <td><input type="text" name="employeeDateOfBirth" placeholder="${empl.dateOfBirth}" autofocus required/></td>
+        </tr>
+        <tr>
+            <td align="center">Gender:</td>
+            <td><input type="text" name="employeeGender" placeholder="${empl.gender}" autofocus required/></td>
         </tr>
         <tr>
             <td colspan="2" align="center">

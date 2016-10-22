@@ -44,7 +44,7 @@ public class DepartmentController {
 
     //if "id" != null -> Create new Department, else Edit Department
     @RequestMapping(value = "/depSave", method = RequestMethod.POST)
-    public ModelAndView addNewOne(@RequestParam(required = true) String departmentName,
+    public ModelAndView addNewOne(@RequestParam String departmentName,
                                   @RequestParam(required = false) Integer id) {
         List<ConstraintViolation> violations;
         Department department;
