@@ -20,6 +20,9 @@ public class MainController {
     @Autowired
     private ContactService contactService;
 
+    /*
+    // ---------------------------------Открытие сессии, вывод страницы Home.jsp---------------------------------
+    */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView showAll(HttpServletRequest request, HttpServletResponse response) {
         //ModelAndView modelAndView = new ModelAndView("contacts/all");
@@ -27,45 +30,81 @@ public class MainController {
         HttpSession session = request.getSession();
         return new ModelAndView(JspPath.HOME);
     }
-
+    /*
+    // -------------------------------------------------END------------------------------------------------------
+    */
+    /*
+    // ----------------------------------Открыте страницы departments/edit---------------------------------------
+    */
     @RequestMapping(value = "/depEdit", method = RequestMethod.GET)
     public ModelAndView toDepartments (){
         return new ModelAndView(JspPath.DEPARTMENT_ADD);
      }
-
+    /*
+    // -------------------------------------------------END------------------------------------------------------
+    */
+    /*
+    // ----------------------------------Открыте страницы employees/edit-----------------------------------------
+    */
     @RequestMapping(value = "/empEdit", method = RequestMethod.GET)
     public ModelAndView toEmployee (){
         return new ModelAndView(JspPath.EMPLOYEERS_ADD);
     }
-
-
-
+    /*
+    // -------------------------------------------------END------------------------------------------------------
+    */
+    /*
+    // ------------------------------------------???Страница add???----------------------------------------------
+    */
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView showAddForm() {
         return new ModelAndView("contacts/add_form", "contact", new Contact());
     }
+    /*
+    // -------------------------------------------------END------------------------------------------------------
+    */
 
+    /*
+    // ------------------------------------------???Страница add???----------------------------------------------
+    */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addNewOne(@ModelAttribute Contact contact) {
         contactService.save(contact);
         return "redirect:/success";
     }
-
+    /*
+    // -------------------------------------------------END------------------------------------------------------
+    */
+    /*
+    // ------------------------------------??Страница успешного сохранения??-------------------------------------
+    */
     @RequestMapping(value = "/success", method = RequestMethod.GET)
     public ModelAndView showSuccess(@ModelAttribute Contact contact) {
         ModelAndView modelAndView = new ModelAndView("success");
         return modelAndView;
     }
-
+    /*
+    // -------------------------------------------------END------------------------------------------------------
+    */
+    /*
+    // ----------------------------------------------Неизвестно--------------------------------------------------
+    */
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public ModelAndView showEditForm(@RequestParam(required = true) Long id) {
         return new ModelAndView("contacts/add_form", "contact", contactService.get(id));
     }
-
+    /*
+    // -------------------------------------------------END------------------------------------------------------
+    */
+    /*
+    // ----------------------------------------------Неизвестно--------------------------------------------------
+    */
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String deleteContact(@RequestParam(required = true) Long id) {
         contactService.remove(id);
         return "redirect:/";
     }
-
+    /*
+    // -------------------------------------------------END------------------------------------------------------
+    */
 }

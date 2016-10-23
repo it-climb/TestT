@@ -1,5 +1,7 @@
 package evg.testt.service;
 
+import evg.testt.model.Department;
+import evg.testt.model.Employee;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;

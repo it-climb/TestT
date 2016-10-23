@@ -4,68 +4,42 @@
 <html class="no-js">
 <head>
     <link rel="stylesheet" href="/resources/css/empEdit.css" type="text/css">
-    <title>Edit</title>
+    <title>Employee</title>
 </head>
 <body>
 <form:form method="post" action="/empSave">
 
-    <div id="textDiv">
+    <input type="hidden" name="idDep" value="${idDep}"/>
+    <input type="hidden" name="idEmp" value="${getEmpById.id}"/>
 
+    <div id="textDiv">
         <p>employee</p>
     </div>
     <div id="inputs">
-
         <div id="firstFive">
             <div id="nameDiv">
-                <p>name: </p><input type="text" name="name" class="textInput"/>
+                <p>name: </p><input type="text" name="name" class="textInput" value="${getEmpById.name}"/>
             </div>
-
             <div id="surnameDiv">
-                <p>surname: </p><input type="text" name="surname" class="textInput"/>
+                <p>surname: </p><input type="text" name="surname" class="textInput" value="${getEmpById.surname}"/>
             </div>
-
-            <div id="patronymicDiv">
-                <p>patronymic: </p><input type="text" name="patronymic" class="textInput"/>
-            </div>
-
             <div id="mailDiv">
-                <p>mail: </p><input type="text" name="mail" class="textInput"/>
-            </div>
-
-            <div id="birthdayDiv">
-                <p>birthday: </p><input type="text" name="birthday" class="textInput"/>
+                <p>mail: </p><input type="text" name="mail" class="textInput" value="${getEmpById.mail}"/>
             </div>
         </div>
 
-        <div id="secondFive">
-            <div id="telDiv">
-                <p>tel: </p><input type="text" name="tel" class="textInput"/>
-            </div>
-
-            <div id="positionDiv">
-                <p>position: </p><input type="text" name="position" class="textInput"/>
-            </div>
-
-            <div id="departmentDiv">
-                <p>department: </p><input type="text" name="department" class="textInput"/>
-            </div>
-
-            <div id="projectDiv">
-                <p>project: </p><input type="text" name="currentProject" class="textInput"/>
-            </div>
-
-            <div id="registrationDiv">
-                <p>registration: </p><input type="text" name="dateregistration" class="textInput"/>
-            </div>
-        </div>
-
-        <div id="buttonDiv">
-            <input type="submit" class="buttonInput"/>
-        </div>
+            <input type="submit" class="buttonInput" value="save"/>
 
     </div>
+</form:form>
 
 
+<form:form method="get" action="/empOutput">
+    <input type="submit" class="buttonInput" value="emp"/>
+</form:form>
+
+<form:form method="get" action="/">
+    <input type="submit" class="buttonInput" value="<-"/>
 </form:form>
 
 </body>

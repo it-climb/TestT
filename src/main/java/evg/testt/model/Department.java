@@ -1,19 +1,36 @@
 package evg.testt.model;
 
-import org.hibernate.annotations.Type;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import java.util.Date;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 @Entity(name = "departments")
-public class Department extends BaseModel{
+public class Department extends BaseModel {
+    /*
+    // -----------------------------------------Отношения в БД----------------------------------------------------
+    */
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "departments", cascade = CascadeType.ALL)
+    List<Employee> employee;
+    /*
+    // -----------------------------------------------------------------------------------------------------------
+    */
 
+    /*
+    // -------------------------------------------Переменные------------------------------------------------------
+    */
     private String name;
     private String tel;
     private int numbersOfEmployeer;
     private String mail;
     private String nameOfEmployeer;
-
+    /*
+    // ----------------------------------------------------------------------------------------------------------
+    */
+    /*
+    // ---------------------------------Сеттеры - Геттеры для переменных-----------------------------------------
+    */
     public String getName() {
         return name;
     }
@@ -53,4 +70,21 @@ public class Department extends BaseModel{
     public void setNameOfEmployeer(String nameOfEmployeer) {
         this.nameOfEmployeer = nameOfEmployeer;
     }
+
+    /*
+    // ---------------------------------------------------------------------------------------------------------
+    */
+    /*
+    // ---------------------------------Сеттеры - Геттеры для эмплоеров-----------------------------------------
+    */
+    public void setListEmpl(List<Employee> e){
+        this.employee = e;
+    }
+    public List<Employee> getListEmpl(){
+        return employee;
+    }
+    /*
+    // ---------------------------------------------------------------------------------------------------------
+    */
+
 }

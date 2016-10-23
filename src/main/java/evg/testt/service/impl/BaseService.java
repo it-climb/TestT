@@ -1,5 +1,6 @@
 package evg.testt.service.impl;
 
+import evg.testt.model.Employee;
 import evg.testt.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
