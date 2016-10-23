@@ -6,10 +6,11 @@
 </head>
 <body>
 <form:form method="post" action="/depSave">
+    <input type="hidden" name="id" value="${department.id}">
     <table>
         <tr>
             <td>Name:</td>
-            <td><input type="text" name="name"/></td>
+            <td><input type="text" name="name" value="${department.name}"/></td>
         </tr>
         <tr>
             <td colspan="2">
