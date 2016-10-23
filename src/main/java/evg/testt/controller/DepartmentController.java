@@ -33,22 +33,66 @@ public class DepartmentController {
         return new ModelAndView(JspPath.DEPARTMENT_ALL, "departments", departments);
     }
 
-    @RequestMapping(value = "/depAdd", method = RequestMethod.GET)
-    public ModelAndView showAdd() {
-        return new ModelAndView(JspPath.DEPARTMENT_ADD);
+    @RequestMapping(value = "/depAdd")
+    public ModelAndView showAdd(@RequestParam(required = false) Integer id) {
+if (id != null)
+{
+    Department department = new Department();
+    try {
+        department = departmentService.getById(id);
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return new ModelAndView(JspPath.DEPARTMENT_ADD, "departments", department);
+}
+else {
+    return new ModelAndView(JspPath.DEPARTMENT_ADD);
+}
     }
 
     @RequestMapping(value = "/depSave", method = RequestMethod.POST)
-    public String addNewOne(@RequestParam(required = true) String name) {
-        Department addedDepartment = new Department();
-        addedDepartment.setName(name);
-        try {
-            departmentService.insert(addedDepartment);
-        } catch (SQLException e) {
-            e.printStackTrace();
+    public String addNewOne(@RequestParam(required = true) String name,
+                            @RequestParam(required = false) Integer id) {
+
+
+        if (id != null) {
+
+            Department department = new Department();
+            try {
+                department = departmentService.getById(id);
+                department.setName(name);
+                departmentService.update(department);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            return "redirect:/dep";
+        } else {
+            Department department = new Department();
+            department.setName(name);
+            try {
+
+
+                departmentService.insert(department);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return "redirect:/dep";
         }
+    }
+
+    @RequestMapping(value = "/depDelete", method = RequestMethod.POST)
+    public String deleteDep (@RequestParam(required = true) Integer id) throws SQLException {
+        Department department = new Department();
+        department.setId(id);
+        departmentService.delete(department);
         return "redirect:/dep";
     }
 
 
+
+
+
 }
+
