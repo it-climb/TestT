@@ -12,5 +12,6 @@
 </head>
 <body>
   Home World !
+  <a href="/dep">Departments</a>
 </body>
 </html>

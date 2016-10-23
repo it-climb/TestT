@@ -9,7 +9,8 @@
     <table>
         <tr>
             <td>Name:</td>
-            <td><input type="text" name="name"/></td>
+            <td><input type="text" value="${depRef.name}" name="name" /></td>
+            <td><input type="hidden" value="${depRef.id}" name="id" /></td>
         </tr>
         <tr>
             <td colspan="2">
