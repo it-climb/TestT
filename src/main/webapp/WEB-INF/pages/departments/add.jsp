@@ -19,13 +19,7 @@
         <input type="submit" value="Create">
     </form>
 </form:form>
-    <div>
-        <c:forEach var="violation" items="${violations}">
-            <p>
-                ${violation.message}
-            </p>
-        </c:forEach>
-    </div>
+
 </center>
 </body>
 </html>

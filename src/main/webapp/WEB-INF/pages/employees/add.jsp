@@ -16,7 +16,7 @@
         <tr>
             <td align="center">SecondName:</td>
             <td><input type="text" name="secondName" placeholder="Иванов" autofocus required/></td>
-            <td><input type="hidden" name="depID" value="${depID}"/></td>
+
         </tr>
         <tr>
             <td align="center">Phone:</td>
@@ -37,15 +37,17 @@
     </table>
     <form>
         <td><input type="submit" value="Create"/></td>
+        <td><input type="hidden" name="depID" value="${depID}"/></td>
+
     </form>
 </form:form>
-    <div>
-        <c:forEach var="violations" items="${violations}">
-            <p>
-                ${violations.message}
-            </p>
-    </div>
-</c:forEach>
+    <%--<div>--%>
+        <%--<c:forEach var="violations" items="${violations}">--%>
+            <%--<p>--%>
+                <%--${violations.message}--%>
+            <%--</p>--%>
+    <%--</div>--%>
+<%--</c:forEach>--%>
 </center>
 </body>
 </html>

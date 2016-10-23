@@ -13,25 +13,27 @@ import java.util.Calendar;
 @Entity(name = "employees")
 public class Employee extends BaseModel{
 
-    @NotNull(message = "it's null", errorCode = "isNull")
     @Length(min=2, max=30, message = "Error length", errorCode = "length")
-    @MatchPattern(pattern="^[a-zA-z0-9]{1,}", message = "Error First Name, rename", errorCode = "notMuchPattern")
+    @MatchPattern(pattern="^[A-za-z0-9 \\s]{1,}", message = "Error First Name, rename", errorCode = "notMuchPattern")
     private String firstName;
-    @NotNull(message = "it's null", errorCode = "isNull")
+
     @Length(min=2, max=30, message = "Error length", errorCode = "length")
-    @MatchPattern(pattern="^[a-zA-z0-9]{1,}", message = "Error Second Name, rename", errorCode = "notMuchPattern")
+    @MatchPattern(pattern="^[a-zA-z0-9\\s]{1,}", message = "Error Second Name, rename", errorCode = "notMuchPattern")
     private String secondName;
-    @NotNull(message = "it's null", errorCode = "isNull")
+
     @Length(min=5, max=12, message = "Error length, try again", errorCode = "length")
-    @MatchPattern(pattern="^+[0-9]{1,}", message = "Error phone number, try again", errorCode = "notMuchPattern")
+    @MatchPattern(pattern="^+[0-9\\s]{1,}", message = "Error phone number, try again", errorCode = "notMuchPattern")
     private String phone;
 
-    @MatchPattern(pattern = "^([a-z0-9]{1,}[\\.\\_\\-]?[a-z0-9]{1,})\\@([a-z0-9]{2,}\\.)([a-z]{2,2}|com|ru|ua)$", message = "Error e-mail!!! Try again")
+    @Length(min=1, max=50, message = "Error length, try again", errorCode = "length")
+    @MatchPattern(pattern = "^([A-za-z0-9]{1,}[\\.\\_\\-]?[a-z0-9]{1,})\\@([a-z0-9]{2,}\\.)([a-z]{2,}|com|ru|ua)$", message = "Error e-mail!!! Try again")
     private String email;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar dateOfBirth;
+
+
     private String gender;
 
     @ManyToOne

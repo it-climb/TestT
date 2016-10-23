@@ -1,7 +1,6 @@
 package evg.testt.controller;
 
-import com.sun.tracing.dtrace.ModuleAttributes;
-import evg.testt.dao.EmployeeDao;
+
 import evg.testt.model.Department;
 import evg.testt.model.Employee;
 import evg.testt.service.DepartmentService;
@@ -9,6 +8,7 @@ import evg.testt.service.EmployeeService;
 import evg.testt.util.JspPath;
 import net.sf.oval.ConstraintViolation;
 import net.sf.oval.Validator;
+import org.dom4j.dom.DOMNodeHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -46,43 +46,36 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/emplAdd", method = RequestMethod.POST)
-    public ModelAndView showNewEmployeePage(@RequestParam(required = true)Integer depID) {
+    public ModelAndView NewEmployeePage(@RequestParam Integer depID) {
         ModelAndView modelAndView = new ModelAndView(JspPath.EMPLOYEE_ADD);
         modelAndView.addObject("depID", depID);
         return modelAndView;
     }
-//if "emplID != null -> Create new Employye, elle Edit Employee
-    @RequestMapping(value = "/emplSave", method = RequestMethod.POST)
-    public ModelAndView addNewOne(@ModelAttribute Employee employee,
-                                  @RequestParam Integer depID) {
-        List<ConstraintViolation> vialations;
 
-        if(employee.getId() == null) {
-
-            vialations = validator.validate(employee);
-
-            if(vialations.size() >= 0){
-            employee.setDepartment(departmentService.getById(depID));
-            employeeService.insert(employee);
-            }else {
-                ModelAndView modelAndView = new ModelAndView((JspPath.EMPLOYEE_ADD), "vialations", vialations);
-                return modelAndView.addObject("depID", depID);
-            }
-        }else {
-                departmentService.update(departmentService.getById(depID));
-                employeeService.update(employee);
-        }
-        return new ModelAndView("redirect:/allEmplInDep?depID="+depID);
-
-    }
     @RequestMapping(value = "/emplEdit", method = RequestMethod.POST)
-    public ModelAndView EditOne (@RequestParam(required = true) Integer id, Integer depID){
-        Employee employee = null;
-        employee = employeeService.getById(id);
-        ModelAndView modelAndView = new ModelAndView(JspPath.EMPLOYEE_EDIT, "empl", employee);
-        modelAndView.addObject("depID", depID);
-        return modelAndView;
+    public ModelAndView EditOneEmployee(@RequestParam Integer depID, Integer id) {
+        Employee employee = employeeService.getById(id);
+        ModelAndView modelAndView = new ModelAndView(JspPath.EMPLOYEE_EDIT, "employee", employee);
+        return modelAndView.addObject("depID", depID);
     }
+
+    @RequestMapping(value = "/emplSave", method = RequestMethod.POST)
+    public ModelAndView addNewEmployee(@ModelAttribute Employee employee, @RequestParam Integer depID) {
+
+        List<ConstraintViolation> vialations;
+        vialations = validator.validate(employee);
+
+        if(vialations.size()>=0){
+            employee.setDepartment(departmentService.getById(depID));
+            if(employee.getId()==null){
+                employeeService.insert(employee);
+            }else {employeeService.update(employee);}
+        }else {
+                return new ModelAndView(JspPath.EMPLOYEE_EDIT, "employee", employee);
+            }
+        return new ModelAndView("redirect:/allEmplInDep?depID="+depID);
+    }
+
     @RequestMapping(value = "/emplDel", method = RequestMethod.POST)
     public String delOne(@RequestParam(required = true) Integer id, Integer depID) {
         Employee employee = new Employee();

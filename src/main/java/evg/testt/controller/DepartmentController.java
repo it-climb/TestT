@@ -53,7 +53,7 @@ public class DepartmentController {
             department.setName(departmentName);
             violations = validator.validate(department);
 
-            if (violations.size() == 0) {
+            if (violations.isEmpty()) {
                 departmentService.insert(department);
             } else {
                 return new ModelAndView((JspPath.DEPARTMENT_ADD), "violations", violations);

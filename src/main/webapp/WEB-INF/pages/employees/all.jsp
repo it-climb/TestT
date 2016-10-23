@@ -28,13 +28,12 @@
                 </form:form>
                 <form:form method ="post" action ="/emplEdit">
                 <td>
-                    <input type="submit" value="Edit" />
+                    <input type="submit" value="Edit"/>
                     <input type="hidden" name = "id" value="${employee.id}">
                     <input type="hidden" name = "depID" value="${department.id}">
-
-                    </form:form>
-                    <form:form action="/birthday" method="get">
                 </td>
+                </form:form>
+                <form:form action="/birthday" method="get">
                 <td>
                     <input type="submit" value="Birthday"/>
                     <input type="hidden" name = "id" value="${employee.id}">
@@ -42,21 +41,18 @@
                 </td>
                 </form:form>
             </tr>
-
-
         </c:forEach>
-        <tr>
-            <form:form action="/emplAdd" method="post">
+            <tr>
+                <form:form action="/emplAdd" method="post">
                 <td colspan="5" align="center">
                     <input type="submit" value="Add new Employee">
                     <input type="hidden" name = "depID" value="${department.id}">
                 </td>
-            </form:form>
-
-        </tr>
-        <tr>
+                </form:form>
+            </tr>
+            <tr>
             <td colspan="5" align="center"><a href="/dep"><button>Back to Departments</button></a></td>
-        </tr>
+            </tr>
     </table>
 </center>
 </body>

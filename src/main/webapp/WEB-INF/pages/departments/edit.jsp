@@ -33,6 +33,13 @@
     </tr>
     </form:form>
 </table>
+<div>
+    <c:forEach var="violation" items="${violations}">
+        <p>
+                ${violation.message}
+        </p>
+    </c:forEach>
+</div>
 </center>
 </body>
 </html>
