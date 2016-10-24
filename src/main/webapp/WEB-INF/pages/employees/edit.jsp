@@ -9,37 +9,35 @@
 <html>
 <head>
     <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js"></script>
+    <script src="resources/js/validation.js"></script>
 </head>
 <body>
-    <table>
-        <form method="get" action="/empSave">
-            <tr>
-                <td>FirstName:</td>
-                <td>
-                    <input type="text" name="firstName" value="${employee.firstName}"/>
-                </td>
-            </tr>
-            <tr>
-                <td>SecondName:</td>
-                <td>
-                    <input type="text" name="secondName" value="${employee.secondName}"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="hidden" name="depId" value="${depId}"/>
-                    <input type="hidden" name="id" value="${employee.id}"/>
-                    <input type="submit" value="Insert new employee"/>
-                </td>
-            </tr>
-        </form>
-        <tr>
-            <td>
-                <form method="post" action="/dep">
-                    <input type="submit" value="View All Departments"/>
-                </form>
-            </td>
-        </tr>
-    </table>
+<form class="cmxform" id="updateEmployee" method="get" action="/empSave">
+    <fieldset>
+        <legend>Please provide First and Second name of Employee</legend>
+        <p>
+            <label for="fname">Name (required, 3-30 characters)</label>
+            <input id="fname" name="firstName" minlength="3" maxlength="30" type="text" required value="${employee.firstName}">
+        </p>
+        <p>
+            <label for="sname">Second Name (required, 3-30 characters)</label>
+            <input id="sname" name="secondName" minlength="3" maxlength="30" type="text" required value="${employee.secondName}">
+        </p>
+        <p>
+            <input type="hidden" name="depId" value="${depId}"/>
+        </p>
+        <p>
+            <input type="hidden" name="id" value="${employee.id}"/>
+        </p>
+        <p>
+            <input class="submit" type="submit" value="Update/Insert new employee">
+        </p>
+    </fieldset>
+</form>
+<form method="get" action="/dep">
+    <input type="submit" value="Back to Departments"/>
+</form>
 </body>
 </html>
