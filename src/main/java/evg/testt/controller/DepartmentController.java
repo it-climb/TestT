@@ -50,8 +50,8 @@ public class DepartmentController {
                             @RequestParam(required = true) Integer id) {
         Department department = new Department();
         if (id == null) {
-            department.setName(name);
             try {
+                department.setName(name);
                 departmentService.insert(department);
             } catch (SQLException e) {
                 e.printStackTrace();
