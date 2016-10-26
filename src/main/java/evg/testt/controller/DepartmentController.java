@@ -38,17 +38,45 @@ public class DepartmentController {
         return new ModelAndView(JspPath.DEPARTMENT_ADD);
     }
 
+    @RequestMapping(value = "/depUpdate", method = RequestMethod.GET)
+    public ModelAndView updateDep(@RequestParam(required = true) Integer id) {
+        Department department = new Department();
+        department.setId(id);
+        return new ModelAndView(JspPath.DEPARTMENT_ADD, "departments", department);
+    }
+
     @RequestMapping(value = "/depSave", method = RequestMethod.POST)
-    public String addNewOne(@RequestParam(required = true) String name) {
-        Department addedDepartment = new Department();
-        addedDepartment.setName(name);
+    public String addNewOne(@RequestParam(required = true) String name,
+                            @RequestParam(required = true) Integer id) {
+        Department department = new Department();
+        if (id == null) {
+            department.setName(name);
+            try {
+                departmentService.insert(department);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                department = departmentService.getById(id);
+                department.setName(name);
+                departmentService.update(department);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return "redirect:/dep";
+    }
+
+    @RequestMapping(value = "/depDelete", method = RequestMethod.GET)
+    public String deleteDep(@RequestParam(required = true) Integer id){
         try {
-            departmentService.insert(addedDepartment);
+            Department department = departmentService.getById(id);
+            departmentService.delete(department);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return "redirect:/dep";
     }
-
 
 }
