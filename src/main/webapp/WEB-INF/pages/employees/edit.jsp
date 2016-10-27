@@ -12,7 +12,7 @@
             <td>
                 <input type="text" name="firstName">
                 <input type="text" name="secondName">
-                <input type="hidden" name="id" value="${employee.id}">
+                <input type="hidden" name="id" value="${employees.id}">
             </td>
         </tr>
         <tr>
