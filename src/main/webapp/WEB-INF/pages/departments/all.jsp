@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html class="no-js">
 <head>
-  <title>All</title>
+  <title>All Departments</title>
 </head>
 <table width="600px">
   <tr>
@@ -10,7 +10,7 @@
   </tr>
   <c:forEach var="department" items="${departments}">
     <tr>
-      <td>${department.name}</td>
+      <td><a href="/emp">${department.name}</td>
       <td>
         <form method="get" action="/depDelete">
           <input type="hidden" name="id" value="${department.id}">
@@ -27,7 +27,7 @@
   </c:forEach>
   <tr>
     <td colspan="5">
-      <a href="/depAdd">Add new one</a>
+      <a href="/depAdd">Add new departments</a>
     </td>
   </tr>
 </table>

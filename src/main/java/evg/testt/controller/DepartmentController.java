@@ -69,7 +69,7 @@ public class DepartmentController {
     }
 
     @RequestMapping(value = "/depDelete", method = RequestMethod.GET)
-    public String deleteDep(@RequestParam(required = true) Integer id){
+    public String deleteDep(@RequestParam(required = true) Integer id) {
         try {
             Department department = departmentService.getById(id);
             departmentService.delete(department);
