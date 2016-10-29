@@ -1,12 +1,17 @@
 package evg.testt.model;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Entity(name = "employees")
 public class Employee extends BaseModel{
 
     private String firstName;
+
     private String secondName;
+
+    @ManyToOne
+    @JoinColumn(name = "department_id", nullable = false)
+    private Department department;
 
     public String getFirstName() {
         return firstName;
@@ -22,5 +27,13 @@ public class Employee extends BaseModel{
 
     public void setSecondName(String secondName) {
         this.secondName = secondName;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }

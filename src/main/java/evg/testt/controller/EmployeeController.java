@@ -1,6 +1,8 @@
 package evg.testt.controller;
 
+import evg.testt.model.Department;
 import evg.testt.model.Employee;
+import evg.testt.service.DepartmentService;
 import evg.testt.service.EmployeeService;
 import evg.testt.util.JspPath;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.SQLException;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Created by funtusthan on 26.10.16.
@@ -24,16 +24,16 @@ public class EmployeeController {
     @Autowired
     EmployeeService employeeService;
 
+    @Autowired
+    DepartmentService departmentService;
+
     @RequestMapping(value = "/emp", method = RequestMethod.GET)
-    public ModelAndView showAll() {
-        List<Employee> employees;
-        try {
-            employees = employeeService.getAll();
-        } catch (SQLException e) {
-            employees = Collections.emptyList();
-            e.printStackTrace();
-        }
-        return new ModelAndView(JspPath.EMPLOYEE_ALL, "employees", employees);
+    public ModelAndView showAll(@RequestParam(required = true) Integer id) throws SQLException {
+        ModelAndView modelAndView = new ModelAndView(JspPath.EMPLOYEE_ALL);
+        Department department = departmentService.getById(id);
+        modelAndView.addObject("department",department);
+        modelAndView.addObject("employees", employeeService.getByDepartment(department));
+        return modelAndView;
     }
 
     @RequestMapping(value = "/empAdd", method = RequestMethod.GET)
@@ -51,9 +51,11 @@ public class EmployeeController {
     @RequestMapping(value = "/empSave", method = RequestMethod.POST)
     public String addNewOne(@RequestParam(required = true) String firstName,
                             @RequestParam(required = true) String secondName,
-                            @RequestParam(required = true) Integer id) {
+                            @RequestParam(required = true) Integer id_department) throws SQLException {
+        Department department = departmentService.getById(id_department);
         Employee employee = new Employee();
-        if (id == null) {
+        employee.setDepartment(department);
+        if (id_department == null) {
             try {
                 employee.setFirstName(firstName);
                 employee.setSecondName(secondName);
@@ -63,7 +65,7 @@ public class EmployeeController {
             }
         } else {
             try {
-                employee = employeeService.getById(id);
+                employee = employeeService.getById(id_department);
                 employee.setFirstName(firstName);
                 employee.setSecondName(secondName);
                 employeeService.update(employee);
@@ -71,7 +73,7 @@ public class EmployeeController {
                 e.printStackTrace();
             }
         }
-        return "redirect:/emp";
+        return "redirect:/emp?id"+id_department;
     }
 
     @RequestMapping(value = "/empDelete", method = RequestMethod.GET)

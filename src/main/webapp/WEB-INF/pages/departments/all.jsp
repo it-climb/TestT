@@ -10,7 +10,7 @@
   </tr>
   <c:forEach var="department" items="${departments}">
     <tr>
-      <td><a href="/emp">${department.name}</td>
+      <td>${department.name}</td>
       <td>
         <form method="get" action="/depDelete">
           <input type="hidden" name="id" value="${department.id}">
@@ -21,6 +21,12 @@
         <form method="get" action="/depUpdate">
           <input type="hidden" name="id" value="${department.id}">
           <input type="submit" value="update">
+        </form>
+      </td>
+      <td>
+        <form method="get" action="/emp">
+          <input type="hidden" name="id" value="${department.id}">
+          <input type="submit" value="employees">
         </form>
       </td>
     </tr>
