@@ -17,6 +17,9 @@ public class User extends BaseModel{
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "user", orphanRemoval = true)
     private Role role;
 
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "user", orphanRemoval = true)
+    private UserDetails userDetails;
+
     public String getLogin() {
         return login;
     }
@@ -39,5 +42,13 @@ public class User extends BaseModel{
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public UserDetails getUserDetails() {
+        return userDetails;
+    }
+
+    public void setUserDetails(UserDetails userDetails) {
+        this.userDetails = userDetails;
     }
 }

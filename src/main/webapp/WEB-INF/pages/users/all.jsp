@@ -42,10 +42,13 @@
                     ${user.role.role}
             </td>
             <td>
-                <a href="userAddRole?id=${user.id}">add role</a>
+                <a href="userAddRole?id=${user.id}">Add role</a>
             </td>
             <td>
-                <a href="userDel?id=${user.id}">delete user</a>
+                <a href="userDel?id=${user.id}">Delete user</a>
+            </td>
+            <td>
+                <a href="userEdit?id=${user.id}">Edit user</a>
             </td>
         </tr>
     </c:forEach>

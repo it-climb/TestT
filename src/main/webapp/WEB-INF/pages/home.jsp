@@ -5,35 +5,44 @@
 <html>
 <head>
     <title>Hello world</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/main.css" />
 </head>
+
 <body>
-<header>
-    <div align="right">
-        <security:authorize access="isAuthenticated()">
-            User:<security:authentication property="principal.username"/>
-        </security:authorize>
+
+<header id="header">
+    <nav class="left">
+        <a href="#menu"><span>Menu</span></a>
+    </nav>
+    <a href="/home" class="logo">Mary</a>
+    <nav class="right">
         <security:authorize access="isAnonymous()">
-            <a href="/login">Login</a>
-            to be authorized user
-        </security:authorize>
-    </div>
-    <table>
-        <td><a href="/home">Home</a></td>
-        <td><a href="/dep">Departments</a></td>
-        <security:authorize access="isAnonymous()">
-            <td><a href="/login">Login</a></td>
+            <a href="/login" class="button alt">Log in</a>
         </security:authorize>
         <security:authorize access="isAuthenticated()">
-            <td>
-                <a href="/logout" >Logout</a>
-            </td>
+            <a href="/logout" class="button alt">Log out</a>
         </security:authorize>
-        <security:authorize access="hasRole('ROLE_ADMIN')">
-            <td><a href="/users">Users</a></td>
-        </security:authorize>
-    </table>
+    </nav>
 </header>
 
-Template for new work!
+<!-- Menu -->
+<nav id="menu">
+    <ul class="links">
+        <li><a href="/home">Home</a></li>
+        <li><a href="/dep">Departments</a></li>
+        <security:authorize access="hasRole('ROLE_ADMIN')">
+            <li><a href="/users">Users</a></li>
+        </security:authorize>
+    </ul>
+</nav>
+
+<!-- Scripts -->
+<script src="${pageContext.request.contextPath}/resources/assets/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/assets/js/jquery.scrolly.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/assets/js/skel.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/assets/js/util.js"></script>
+<script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 </body>
 </html>

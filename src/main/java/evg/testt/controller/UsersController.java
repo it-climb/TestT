@@ -2,11 +2,17 @@ package evg.testt.controller;
 
 import evg.testt.model.Role;
 import evg.testt.model.User;
+import evg.testt.model.UserDetails;
+import evg.testt.oval.SpringOvalValidator;
 import evg.testt.service.RoleService;
+import evg.testt.service.UserDetailsService;
 import evg.testt.service.UserService;
 import evg.testt.util.JspPath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,7 +27,13 @@ import java.util.List;
 public class UsersController {
 
     @Autowired
+    SpringOvalValidator validator;
+
+    @Autowired
     UserService userService;
+
+    @Autowired
+    UserDetailsService userDetailsService;
 
     @Autowired
     RoleService roleService;
@@ -31,7 +43,7 @@ public class UsersController {
         return new User();
     }
 
-    @RequestMapping(value = {"","/","home"})
+    @RequestMapping(value = {"", "/", "home"})
     public ModelAndView homePage() {
         return new ModelAndView(JspPath.HOME);
     }
@@ -41,7 +53,7 @@ public class UsersController {
         return showUsers();
     }
 
-    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    @RequestMapping(value = "/users")
     public ModelAndView showUsers() {
         List<User> users;
         try {
@@ -118,5 +130,42 @@ public class UsersController {
             e.printStackTrace();
         }
         return "forward:/users";
+    }
+
+    @RequestMapping(value = "/userEdit")
+    public ModelAndView editUser(@RequestParam int id, Model model) throws SQLException {
+        if (!userService.isExists(id)) {
+            return showUsers();
+        }
+        User user = userService.getById(id);
+        if (user.getUserDetails() != null) {
+            model.addAttribute("userDetails", user.getUserDetails());
+        } else {
+            model.addAttribute("userDetails", new UserDetails());
+        }
+        model.addAttribute("id", id);
+        return new ModelAndView(JspPath.USERS_EDIT);
+    }
+
+    @RequestMapping(value = "/userSaveEdited")
+    public ModelAndView saveAfterEdit(@ModelAttribute("userDetails") @Validated UserDetails userDetails,
+                                      BindingResult result, @RequestParam int id, Model model) throws SQLException {
+        if (!userService.isExists(id)) {
+            return showUsers();
+        }
+        validator.validate(userDetails, result);
+        if (result.hasErrors()) {
+            model.addAttribute("id", id);
+            return new ModelAndView(JspPath.USERS_EDIT);
+        } else {
+            User user = userService.getById(id);
+            userDetails.setUser(user);
+            if (user.getUserDetails().getId() != null) {
+                userDetailsService.update(userDetails);
+            } else {
+                userDetailsService.insert(userDetails);
+            }
+            return showUsers();
+        }
     }
 }
