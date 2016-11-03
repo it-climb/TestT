@@ -8,9 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-  <title>Hello world</title>
+  <title> Home </title>
 </head>
 <body>
-  Home World !
+  Перейти на <a href="/dep">Department</a>
 </body>
 </html>

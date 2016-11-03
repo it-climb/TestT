@@ -1,9 +1,15 @@
 package evg.testt.model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity(name = "employees")
 public class Employee extends BaseModel{
+    @ManyToOne(fetch= FetchType.LAZY)
+    @JoinColumn(name="departments_id")
+    private Department departments;
 
     private String firstName;
     private String secondName;
@@ -22,5 +28,13 @@ public class Employee extends BaseModel{
 
     public void setSecondName(String secondName) {
         this.secondName = secondName;
+    }
+
+    public Department getDepartments() {
+        return departments;
+    }
+
+    public void setDepartments(Department departments) {
+        this.departments = departments;
     }
 }
