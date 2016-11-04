@@ -1,9 +1,9 @@
 package evg.testt.controller;
 
-import evg.testt.model.Department;
-import evg.testt.model.Employee;
-import evg.testt.service.DepartmentService;
-import evg.testt.service.EmployeeService;
+import evg.testt.model.Person;
+import evg.testt.model.User;
+import evg.testt.service.PersonService;
+import evg.testt.service.UserService;
 import evg.testt.util.JspPath;
 import net.sf.oval.ConstraintViolation;
 import net.sf.oval.Validator;
@@ -21,26 +21,26 @@ import java.util.Collections;
 import java.util.List;
 
 @Controller
-public class EmployeeController {
+public class PersonController {
 
-    Validator validator = new Validator();
+   /* Validator validator = new Validator();
 
     @Autowired
-    EmployeeService employeeService;
+    UserService userService;
     @Autowired
-    DepartmentService departmentService;
+    PersonService personService;
 
     @RequestMapping(value = "/emp", method = RequestMethod.GET)
     public ModelAndView showAll(@RequestParam(required = true) Integer depId) {
         ModelAndView mav = new ModelAndView(JspPath.EMPLOYEE_ALL);
-        List<Employee> employees;
+        List<User> users;
         try {
-            employees = departmentService.getById(depId).getEmployeeList();
+            users = personService.getById(depId).getUserList();
         } catch (SQLException e) {
-            employees = Collections.emptyList();
+            users = Collections.emptyList();
             e.printStackTrace();
         }
-        mav.addObject("employees",employees);
+        mav.addObject("users",users);
         mav.addObject("depId",depId);
         return mav;
     }
@@ -48,14 +48,14 @@ public class EmployeeController {
     @RequestMapping(value = "/empAdd", method = RequestMethod.GET)
     public ModelAndView showAdd(@RequestParam(required = false) Integer id, @RequestParam(required = true) Integer depId) {
         ModelAndView mav = new ModelAndView(JspPath.EMPLOYEE_ADD);
-        Employee addEmployee = new Employee();
+        Person addPerson = new Person();
         try {
-            addEmployee = employeeService.getById(id);
+            addPerson = personService.getById(id);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         catch (Exception e){}
-        mav.addObject("employee", addEmployee);
+        mav.addObject("person", addPerson);
         mav.addObject("depId", depId);
         return mav;
     }
@@ -66,34 +66,34 @@ public class EmployeeController {
                             @RequestParam(required = false) Integer id,
                             @RequestParam(required = true) Integer depId) {
 
-        Employee updateEmployee = new Employee();
+        Person updatePerson = new Person();
 
         List<ConstraintViolation> violations;
 
         try {
             if (id != null) {
-                updateEmployee = employeeService.getById(id);
-                updateEmployee.setFirstName(firstName);
-                updateEmployee.setSecondName(secondName);
-                violations = validator.validate(updateEmployee);
+                updatePerson = personService.getById(id);
+                updatePerson.setFirstName(firstName);
+                updatePerson.setSecondName(secondName);
+                violations = validator.validate(updatePerson);
                 if (violations.size() > 0){
                     violations = null;
                     return "redirect:/empAdd?depId="+depId;
                 }
-                employeeService.update(updateEmployee);
+                personService.update(updatePerson);
             }
             else{
-                updateEmployee.setFirstName(firstName);
-                updateEmployee.setSecondName(secondName);
-                updateEmployee.setDepartments(departmentService.getById(depId));
-                violations = validator.validate(updateEmployee);
+                updatePerson.setFirstName(firstName);
+                updatePerson.setSecondName(secondName);
+                //updatePerson.setUserList(departmentService.getById(depId));
+                violations = validator.validate(updatePerson);
                 if (violations.size() > 0){
                     violations = null;
                     return "redirect:/empAdd?depId="+depId;
                 }
-                employeeService.insert(updateEmployee);
+                personService.insert(updatePerson);
             }
-            departmentService.update(departmentService.getById(depId));
+            personService.update(personService.getById(depId));
         }
         catch (SQLException e) {
             e.printStackTrace();
@@ -123,4 +123,5 @@ public class EmployeeController {
         }
         return "redirect:/emp?depId="+depId;
     }
+    */
 }

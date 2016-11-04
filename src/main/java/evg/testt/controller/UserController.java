@@ -1,7 +1,7 @@
 package evg.testt.controller;
 
-import evg.testt.model.Department;
-import evg.testt.service.DepartmentService;
+import evg.testt.model.User;
+import evg.testt.service.UserService;
 import evg.testt.util.JspPath;
 import net.sf.oval.ConstraintViolation;
 import net.sf.oval.Validator;
@@ -19,9 +19,9 @@ import java.sql.SQLException;
 import java.util.jar.Attributes;
 
 @Controller
-public class DepartmentController {
+public class UserController {
 
-    Validator validator = new Validator();
+    /*Validator validator = new Validator();
 
     @Autowired
     DepartmentService departmentService;
@@ -94,5 +94,5 @@ public class DepartmentController {
             e.printStackTrace();
         }
         return "redirect:/dep";
-    }
+    }*/
 }
