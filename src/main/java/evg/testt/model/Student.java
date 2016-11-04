@@ -11,6 +11,10 @@ public class Student extends BaseModel {
     private Person person;
 
     @ManyToOne
+    @JoinColumn(name = "id_teacher")
+    private Teacher teacher;
+
+    @ManyToOne
     @JoinColumn(name = "id_group")
     private Group group;
 
@@ -39,5 +43,13 @@ public class Student extends BaseModel {
 
     public void setPakageSet(Set<Pakage> pakageSet) {
         this.pakageSet = pakageSet;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 }

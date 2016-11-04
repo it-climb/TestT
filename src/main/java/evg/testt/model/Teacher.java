@@ -13,6 +13,10 @@ public class Teacher extends BaseModel{
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "teacher", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Group> groupSet;
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "teacher", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Student> studentSet;
+
+
     public Person getPerson() {
         return person;
     }
@@ -29,4 +33,11 @@ public class Teacher extends BaseModel{
         this.groupSet = groupSet;
     }
 
+    public Set<Student> getStudentSet() {
+        return studentSet;
+    }
+
+    public void setStudentSet(Set<Student> studentSet) {
+        this.studentSet = studentSet;
+    }
 }
