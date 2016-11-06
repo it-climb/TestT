@@ -34,21 +34,49 @@ public class DepartmentController {
     }
 
     @RequestMapping(value = "/depAdd", method = RequestMethod.GET)
-    public ModelAndView showAdd() {
-        return new ModelAndView(JspPath.DEPARTMENT_ADD);
+    public ModelAndView showAdd(@RequestParam(required = false) Integer id) throws SQLException {
+        if(id!=null) {
+            Department department = departmentService.getById(id);
+            ModelAndView modelAndView = new ModelAndView(JspPath.DEPARTMENT_ADD);
+            modelAndView.addObject("department", department);
+            return modelAndView;
+        } else {
+            return  new ModelAndView(JspPath.DEPARTMENT_ADD);
+        }
     }
 
+
     @RequestMapping(value = "/depSave", method = RequestMethod.POST)
-    public String addNewOne(@RequestParam(required = true) String name) {
-        Department addedDepartment = new Department();
-        addedDepartment.setName(name);
-        try {
-            departmentService.insert(addedDepartment);
-        } catch (SQLException e) {
-            e.printStackTrace();
+    public String addNewOne(@RequestParam(required = true) String name, @RequestParam(required = false) Integer departmentId) {
+        if(departmentId==null) {
+            Department addedDepartment = new Department();
+            addedDepartment.setName(name);
+            try {
+                departmentService.insert(addedDepartment);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                Department department = departmentService.getById(departmentId);
+                department.setName(name);
+                departmentService.update(department);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return "redirect:/dep";
     }
 
+    @RequestMapping (value = "/depDelete", method = RequestMethod.GET)
+    public String deleteNewOne (@RequestParam(required = false) Integer id) {
+        Department deleteDepartment;
+        try {
+            departmentService.delete(deleteDepartment = departmentService.getById(id));
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return "redirect:/dep";
+    }
 
 }

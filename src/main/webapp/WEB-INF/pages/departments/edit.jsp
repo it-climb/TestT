@@ -9,10 +9,11 @@
     <table>
         <tr>
             <td>Name:</td>
-            <td><input type="text" name="name"/></td>
+            <td><input type="text" name="name" value="${department.name}"/></td>
         </tr>
         <tr>
             <td colspan="2">
+                <input type="hidden" name="departmentId" value="${department.id}"/>
                 <input type="submit" />
             </td>
         </tr>
