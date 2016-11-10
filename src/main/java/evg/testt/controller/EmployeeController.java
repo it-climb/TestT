@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class EmployeeController {
@@ -27,7 +28,7 @@ public class EmployeeController {
 
     @RequestMapping(value = "/empl", method = RequestMethod.GET)
     public ModelAndView showAll(@RequestParam(required = true) Integer id) {
-        List<Employee> employee;
+        Set<Employee> employee;
         Department department;
         ModelAndView modelAndView = new ModelAndView(JspPath.EMPLOYEE_ALL);
         try {
@@ -93,7 +94,7 @@ public class EmployeeController {
         } else {
             try {
                 department = departmentService.getById(department_id);
-                  employee = employeeService.getById(employee_id);
+                employee = employeeService.getById(employee_id);
                 employee.setFirstName(firstName);
                 employee.setSecondName(secondName);
                 employee.setDepartments(department);
@@ -127,7 +128,8 @@ public class EmployeeController {
         Department department = employee.getDepartments();
         department.getEmployees().remove(employee);
         departmentService.update(department);
-         Integer department_id = employee.getDepartments().getId();
+        Integer department_id = employee.getDepartments().getId();
         return "redirect:/empl?id=" + department_id;
     }
 }
+
