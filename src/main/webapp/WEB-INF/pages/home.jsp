@@ -8,9 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-  <title>Hello world</title>
+  <title> Department/Employees</title>
 </head>
 <body>
-  Home World !
+<h2><a href="/dep"> Go to the list of departments </a></h2>
 </body>
 </html>
