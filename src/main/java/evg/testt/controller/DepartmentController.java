@@ -2,6 +2,7 @@ package evg.testt.controller;
 
 import evg.testt.model.Department;
 import evg.testt.service.DepartmentService;
+import evg.testt.service.impl.DepartmentServiceImpl;
 import evg.testt.util.JspPath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,16 +39,55 @@ public class DepartmentController {
         return new ModelAndView(JspPath.DEPARTMENT_ADD);
     }
 
-    @RequestMapping(value = "/depSave", method = RequestMethod.POST)
-    public String addNewOne(@RequestParam(required = true) String name) {
-        Department addedDepartment = new Department();
-        addedDepartment.setName(name);
+    @RequestMapping(value = "/deleteDep", method = RequestMethod.GET)
+    public String delete(@RequestParam(required = true) Integer id) {
+        Department deleteDepartment = null;
         try {
-            departmentService.insert(addedDepartment);
+            deleteDepartment = departmentService.getById(id);
+            departmentService.delete(deleteDepartment);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return "redirect:/dep";
+    }
+
+    @RequestMapping(value = "/EditDep", method = RequestMethod.GET)
+    public ModelAndView edit(@RequestParam(required = true) Integer id) throws SQLException {
+        Department editDepartment = null;
+        editDepartment = departmentService.getById(id);
+
+
+      return  new ModelAndView(JspPath.DEPARTMENT_ADD, "department", editDepartment);
+    }
+
+    @RequestMapping(value = "/depSave", method = RequestMethod.POST)
+    public String addNewOne(@RequestParam(required = true) String name,
+                            @RequestParam(required = false) Integer id) throws SQLException {
+        if ( id == null) {
+            Department addedDepartment = new Department();
+            addedDepartment.setName(name);
+            try {
+                departmentService.insert(addedDepartment);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return "redirect:/dep";
+
+        }
+        else {
+
+            Department changeDep = departmentService.getById(id);
+            changeDep.setName(name);
+
+            try {
+                departmentService.update(changeDep);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return "redirect:/dep";
+        }
+
+
     }
 
 

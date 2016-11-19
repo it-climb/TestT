@@ -1,12 +1,16 @@
 package evg.testt.model;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Entity(name = "employees")
 public class Employee extends BaseModel{
 
     private String firstName;
     private String secondName;
+
+
+
+
 
     public String getFirstName() {
         return firstName;
