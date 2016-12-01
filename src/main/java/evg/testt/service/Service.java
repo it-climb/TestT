@@ -1,5 +1,6 @@
 package evg.testt.service;
 
+import evg.testt.model.Department;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
@@ -10,6 +11,8 @@ public interface Service<T> {
     List<T> getAll() throws SQLException;
 
     T getById(Integer id) throws SQLException;
+
+
 
     void delete(T o) throws SQLException;
 

@@ -13,6 +13,26 @@
 <body>
   Home World !
   <a href="/dep" > список департмент</a>
+
+
+  <!-- Инициализация виджета "Bootstrap datetimepicker" -->
+  <div class="form-group">
+    <!-- Элемент HTML с id равным datetimepicker1 -->
+    <div class="input-group date" id="datetimepicker1">
+      <input type="text" class="form-control" />
+      <span class="input-group-addon">
+      <span class="glyphicon glyphicon-calendar"></span>
+    </span>
+    </div>
+  </div>
+  <!-- Инициализация виджета "Bootstrap datetimepicker" -->
+  <script type="text/javascript">
+    $(function () {
+      //Идентификатор элемента HTML (например: #datetimepicker1), для которого необходимо инициализировать виджет "Bootstrap datetimepicker"
+      $('#datetimepicker1').datetimepicker();
+    });
+  </script>
+
 </body>
 
 
