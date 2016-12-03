@@ -3,6 +3,11 @@
 <html>
 <head>
     <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Bootstrap CSS and bootstrap datepicker CSS used for styling the demo pages-->
+    <link rel="stylesheet" href="/resources/css/datepicker.css">
+    <link rel="stylesheet" href="/resources/css/bootstrap.css">
+
 </head>
 <body>
 <form:form method="post" action="/emplSave">
@@ -13,30 +18,30 @@
             <td><input type="text" name="secondName" value=${empl.secondName}></td>
             <td><input type="hidden" name="id" value=${empl.id}></td>
             <td><input type="hidden" name="dep" value=${dep.id}></td>
-        </tr>
+            <td>
+                <div class="container">
+                    <div class="hero-unit">
+                        <input  type="text" placeholder="click to show datepicker" name="dateBirth" id="dateBirth">
+                    </div>
+                </div>
+                <!-- Load jQuery and bootstrap datepicker scripts -->
+                <script src="/resources/js/jquery-1.9.1.min.js"></script>
+                <script src="/resources/js/bootstrap-datepicker.js"></script>
+                <script type="text/javascript">
+                    // When the document is ready
+                    $(document).ready(function () {
+                        $('#dateBirth').datepicker({
+                            format: "dd/mm/yyyy"
+                        });
+                    });
+                </script>
+            </td>
         <tr>
             <td colspan="2">
                 <input type="submit" value = "OK" />
             </td>
         </tr>
     </table>
-
-
-
-    <!-- Инициализация виджета "Bootstrap datetimepicker" -->
-    <script type="text/javascript">
-        $(function () {
-            //Идентификатор элемента HTML (например: #datetimepicker1), для которого необходимо инициализировать виджет "Bootstrap datetimepicker"
-            $('#datetimepicker1').datetimepicker();
-        });
-    </script>
-
-<div class="form-group">
-    <label for="inputDate"> Input date:</label>
-    <input type="date" class="form-control">
-</div>
-
-
 
 </form:form>
 </body>

@@ -13,7 +13,7 @@ public class Department extends BaseModel{
 
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "department", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "department", cascade = CascadeType.REMOVE)
     private Set<Employee> employees;
 
 

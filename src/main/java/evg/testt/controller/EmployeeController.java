@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import java.sql.SQLException;
@@ -59,11 +62,16 @@ public class EmployeeController {
     public String addNewOne(@RequestParam(required = true) String name,
                             @RequestParam(required = true) String secondName,
                             @RequestParam(required = false) Integer id,
-                            @RequestParam(required = false) Integer dep) throws SQLException {
+                            @RequestParam(required = false) Integer dep,
+                            @RequestParam(required = true) String dateBirth) throws SQLException, ParseException {
         if ( id == null) {
             Employee addEmployee = new Employee();
             addEmployee.setFirstName(name);
             addEmployee.setSecondName(secondName);
+            SimpleDateFormat format = new SimpleDateFormat();
+            format.applyPattern("dd/MM/yyyy");
+            Date newdate= format.parse(dateBirth);
+            addEmployee.setBirthday(newdate);
             Department depObj = null;
             depObj = departmentService.getById(dep);
             addEmployee.setDepartment(depObj);
@@ -80,6 +88,10 @@ public class EmployeeController {
             Employee changeEmpl = employeeService.getById(id);
             changeEmpl.setFirstName(name);
             changeEmpl.setSecondName(secondName);
+            SimpleDateFormat format = new SimpleDateFormat();
+            format.applyPattern("dd/MM/yyyy");
+            Date newdate= format.parse(dateBirth);
+            changeEmpl.setBirthday(newdate);
 
             try {
                 employeeService.update(changeEmpl);

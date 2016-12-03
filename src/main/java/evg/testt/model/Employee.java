@@ -1,7 +1,7 @@
 package evg.testt.model;
 
 import javax.persistence.*;
-
+import java.util.Date;
 
 
 @Entity(name = "employees")
@@ -11,10 +11,23 @@ import javax.persistence.*;
 
     private String firstName;
     private String secondName;
+    @Temporal(value = TemporalType.DATE)
+    private Date birthday;
+
+
+
 
     @ManyToOne
     @JoinColumn(name = "department_id")
     private Department department;
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
 
     public void setDepartment(Department department) {
         this.department = department;
